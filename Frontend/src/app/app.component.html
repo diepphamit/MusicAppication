@@ -1,10 +1,21 @@
 <div class="content {{storedTheme}}" role="main">
     <div class="header">
         <app-header></app-header>
+        <div class="theme-switcher-wrap">
+            <label class="theme-switcher" [ngClass]="(storedTheme==='theme-dark')?'theme-switcher active':'theme-switcher'" (click)="setTheme()">
+                    <div class="switch-path">
+                        <div class="switch-handle">
+                            <span class="material-icons">
+                                wb_sunny
+                                </span>
+                        </div>
+                    </div>
+                </label>
+        </div>
     </div>
     <h5 class="text-center title"></h5>
     <!-- <div class="content-box"> -->
-    <div class="theme-switcher-wrap">
+    <!-- <div class="theme-switcher-wrap">
         <label class="theme-switcher" [ngClass]="(storedTheme==='theme-dark')?'theme-switcher active':'theme-switcher'" (click)="setTheme()">
                 <div class="switch-path">
                     <div class="switch-handle">
@@ -12,15 +23,13 @@
                     </div>
                 </div>
             </label>
+    </div> -->
+    <div style="margin-bottom: 5%;">
+        <router-outlet></router-outlet>
     </div>
-
-    <router-outlet></router-outlet>
     <!-- </div> -->
     <div class="footer">
         <app-footer></app-footer>
     </div>
-
-</div>
-<div>
 
 </div>

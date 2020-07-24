@@ -1,63 +1,161 @@
 <div class="container">
     <section>
-        <div class="row">
-            <ngb-carousel [showNavigationArrows]="true" [showNavigationIndicators]="true" interval="12000" [keyboard]="true" [pauseOnHover]="true" [wrap]="true" [activeId]="'secondSlide'">
-                <ng-template ngbSlide>
-                    <div class="picsum-img-wrapper">
-                        <img src="assets/a.jpeg" alt="Angular Carousel 1" style="width: 700px;height: 400px;">
-                    </div>
-                    <div class="carousel-caption">
-                        <h3>Title Goes Here</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                    </div>
-                </ng-template>
-                <ng-template ngbSlide>
-                    <div class="picsum-img-wrapper">
-                        <img src="assets/c.jpeg" alt="Angular Carousel 2" style="width: 700px;height: 400px;">
-                    </div>
-                    <div class="carousel-caption">
-                        <h3>Title Goes Here</h3>
-                        <p>Consectetur tortor volutpat pretium.</p>
-                    </div>
-                </ng-template>
-            </ngb-carousel>
-        </div>
+
+        <ngb-carousel [showNavigationArrows]="true" [showNavigationIndicators]="true" interval="12000" [keyboard]="true" [pauseOnHover]="true" [wrap]="true" [activeId]="'secondSlide'">
+            <ng-template ngbSlide>
+                <div class="picsum-img-wrapper">
+                    <img src="assets/a.jpeg" alt="Angular Carousel 1" style="width: 700px;height: 400px;">
+                </div>
+                <div class="carousel-caption">
+                    <h3>Title Goes Here</h3>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                </div>
+            </ng-template>
+            <ng-template ngbSlide>
+                <div class="picsum-img-wrapper">
+                    <img src="assets/c.jpeg" alt="Angular Carousel 2" style="width: 700px;height: 400px;">
+                </div>
+                <div class="carousel-caption">
+                    <h3>Title Goes Here</h3>
+                    <p>Consectetur tortor volutpat pretium.</p>
+                </div>
+            </ng-template>
+        </ngb-carousel>
+
     </section>
-    <section class="section-services">
-        <div class="container">
-
-            <div class="col-xs-1"></div>
-            <div class="col-xs-6 ">
 
 
+</div>
+<div class="music">
+
+    <div class="row">
+        <div class="col-md-8">
+            <strong class="header">List </strong>
+            <div class="row" style="margin-top:7px">
+
+                <div class="col-md-4">
+                    <div class="onerow content_img">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/1200px-Image_created_with_a_mobile_phone.png" alt="" height="178px" width="244px" style="border-radius:2%;">
+                        <div><span class="material-icons">
+                                favorite_border
+                            </span><span class="material-icons">
+                                play_circle_outline
+                            </span></div>
 
 
-                <div class="col-xs-4 ">
-                    <strong class="album">Album</strong>
-                    <!-- <div class="one-row-class">
-                            <div>
-                                <div class="col-xs-6"><img src="../../../assets/images/main.png"></div>
-                                <div class="col-xs-6">
-                                    <div style="margin-top: 10%;">
-                                        <strong>  <a style="font-size:17px;color: orange;" (click)="openModal(mymodal,item)">{{item.name}}</a></strong>
-                                        <div><strong style="font-size:12px;color: grey;">{{item.address?item.address.city:'Không có dữ liệu '}}| {{item.subjects?item.subjects:'không có môn học'}}</strong></div>
-                                        <div style="margin-top:10%;color: red;">{{item.tuitionPerHour}},000vnđ/h </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="block">{{item.introduction?item.introduction:'không có dữ liệu'}}
+                    </div>
+                    <label for="">Ngày hôm nay</label>
+                </div>
+                <div class="col-md-4 ">
+                    <div class="onerow ">
+                        <div class="onerow content_img">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/1200px-Image_created_with_a_mobile_phone.png" alt="" height="178px" width="244px" style="border-radius:2%;">
+                            <div><span class="material-icons">
+                                    favorite_border
+                                </span><span class="material-icons">
+                                    play_circle_outline
+                                </span></div>
 
-                            </div>
-                            <div> <button type="button" class="btn btn-default ">Mời dạy</button></div>
-                        </div> -->
+
+                        </div>
+                        <label for="">Ngày hôm nay</label>
+                    </div>
+                </div>
+                <div class="col-md-4 ">
+                    <div class="onerow ">
+                        <div class="onerow content_img">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/1200px-Image_created_with_a_mobile_phone.png" alt="" height="178px" width="244px" style="border-radius:2%;">
+                            <div><span class="material-icons">
+                                    favorite_border
+                                </span><span class="material-icons">
+                                    play_circle_outline
+                                </span></div>
+
+
+                        </div>
+                        <label for="">Ngày hôm nay</label>
+                    </div>
+                </div>
+
+                <div class="col-md-4 ">
+                    <div class="onerow ">
+                        <div class="onerow content_img">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/1200px-Image_created_with_a_mobile_phone.png" alt="" height="178px" width="244px" style="border-radius:2%;">
+                            <div><span class="material-icons">
+                                    favorite_border
+                                </span><span class="material-icons">
+                                    play_circle_outline
+                                </span></div>
+
+
+                        </div>
+                        <label for="">Ngày hôm nay</label>
+                    </div>
+                </div>
+                <div class="col-md-4 ">
+                    <div class="onerow ">
+                        <div class="onerow content_img">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/1200px-Image_created_with_a_mobile_phone.png" alt="" height="178px" width="244px" style="border-radius:2%;">
+                            <div><span class="material-icons">
+                                    favorite_border
+                                </span><span class="material-icons">
+                                    play_circle_outline
+                                </span></div>
+
+
+                        </div>
+                        <label for="">Ngày hôm nay</label>
+                    </div>
+                </div>
+                <div class="col-md-4 ">
+                    <div class="onerow ">
+                        <div class="onerow content_img">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/1200px-Image_created_with_a_mobile_phone.png" alt="" height="178px" width="244px" style="border-radius:2%;">
+                            <div><span class="material-icons">
+                                    favorite_border
+                                </span><span class="material-icons">
+                                    play_circle_outline
+                                </span></div>
+
+
+                        </div>
+                        <label for="">Ngày hôm nay</label>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-4 ">
+            <strong class=" header ">Album</strong>
+            <div class="row " style="margin-top:7px;border-bottom: 1px solid brown ;padding-bottom: 5px; ">
+                <div class="col-md-3 "><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/1200px-Image_created_with_a_mobile_phone.png " alt=" " height="70 " width="80px " style="border-radius:2%; "></div>
+                <div class="col-md-9 " style="float: bottom; ">
+                    <div>
+                        <div>
+                            <strong>title</strong><br>
+                            <label for=" ">author</label>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="row " style="margin-top:7px;border-bottom: 1px solid brown ;padding-bottom: 5px; ">
+                <div class="col-md-3 "><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/1200px-Image_created_with_a_mobile_phone.png " alt=" " height="70 " width="80px " style="border-radius:2%; "></div>
+                <div class="col-md-9 " style="float: bottom; ">
+                    <div>
+                        <div>
+                            <strong>title</strong><br>
+                            <label for=" ">author</label>
+                        </div>
+
+                    </div>
                 </div>
             </div>
 
 
         </div>
-        <div class="col-xs-2 "></div>
-        <div class="col-xs-1"></div>
 
-    </section>
-
+    </div>
 </div>
