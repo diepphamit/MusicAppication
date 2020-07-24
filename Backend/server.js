@@ -3,14 +3,15 @@ const graphqlHTTP = require("express-graphql").graphqlHTTP;
 const cors = require("cors");
 
 const mongoose = require('./dbconnect/mongoose');
-const userSchema = require('./graphql/index').userSchema;
+// const userSchema = require('./graphql/index').userSchema;
+const songSchema = require('./graphql/index').songSchema;
 
 const app = express();
 const db = mongoose();
 
 app.use('*', cors());
 app.use('/graphql', cors(), graphqlHTTP({
-  schema: userSchema,
+  schema: songSchema,
   rootValue: global,
   graphiql: true
 }));
