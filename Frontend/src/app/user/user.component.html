@@ -26,7 +26,12 @@
 
 
         <ngb-tab>
-            <ng-template ngbTabTitle style="width:2000px;"><a routerLink='/login' routerLinkActive='active'>Sign In</a></ng-template>
+            <ng-template ngbTabTitle style="width:2000px;" let-method="clinkon">
+                <button class="btn btn-light" (click)="clinkon()">
+                    <a routerLink='/login' routerLinkActive='active'>Sign In</a>
+                </button>
+
+            </ng-template>
             <ng-template ngbTabContent>
                 <router-outlet></router-outlet>
             </ng-template>
