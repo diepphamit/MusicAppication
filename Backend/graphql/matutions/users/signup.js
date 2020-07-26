@@ -1,11 +1,10 @@
 const mongoose = require('mongoose');
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-var GraphQLNonNull = require('graphql').GraphQLNonNull;
-var GraphQLString = require('graphql').GraphQLString;
+const GraphQLString = require('graphql').GraphQLString;
 
-var UserType = require('../../types/user-type');
-var User = require('../../../models/user');
+const UserType = require('../../types/user-type');
+const User = require('../../../models/user');
 
 exports.signup = {
   type: UserType.userTypeToken,
@@ -46,7 +45,8 @@ exports.signup = {
 
         return {
           token: token,
-          email: result.email
+          email: result.email,
+          id: result._id
         };
       }
     }

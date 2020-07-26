@@ -1,9 +1,9 @@
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-var GraphQLString = require('graphql').GraphQLString;
+const GraphQLString = require('graphql').GraphQLString;
 
-var UserType = require('../../types/user-type');
-var User = require('../../../models/user');
+const UserType = require('../../types/user-type');
+const User = require('../../../models/user');
 
 exports.signin = {
   type: UserType.userTypeToken,
@@ -15,17 +15,17 @@ exports.signin = {
         type: GraphQLString,
       }
   },
-  async resolve(root, params) {
-    const user = await User.findOne({ email: params.email });
+  async resolve(root, args) {
+    const user = await User.findOne({ email: args.email });
     if(!user){
       throw new Error("Bad user");
     }
-        
-    const verify = await bcrypt.compare(params.password, user.password);
+    
+    const verify = await bcrypt.compare(args.password, user.password);
     if (!verify) {
       throw new Error("Bad password");
     }
-
+    
     const token = jwt.sign(
         {
           email: user.email,
@@ -39,7 +39,8 @@ exports.signin = {
 
     return {
         token: token,
-        email: user.email
+        email: user.email,
+        id: user._id
     };
   }
 }

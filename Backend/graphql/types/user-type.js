@@ -1,34 +1,57 @@
-var GraphQLObjectType = require('graphql').GraphQLObjectType;
-var GraphQLNonNull = require('graphql').GraphQLNonNull;
-var GraphQLID = require('graphql').GraphQLID;
-var GraphQLString = require('graphql').GraphQLString;
-const mongoose = require('mongoose');
+const GraphQLObjectType = require('graphql').GraphQLObjectType;
+const GraphQLString = require('graphql').GraphQLString;
+const GraphQLList = require('graphql').GraphQLList;
+const GraphQLInt = require('graphql').GraphQLInt;
+
+const FavoriteType = require('./favorite-type').favoriteType;
+
 
 // User Type
-exports.userType = new GraphQLObjectType({
+const userType = new GraphQLObjectType({
   name: 'user',
-  fields: function () {
-    return {
+  fields: {
+    _id: {
+      type: GraphQLString
+    },
+    email: {
+      type: GraphQLString
+    },
+    favorites: {
+      type: new GraphQLList(FavoriteType)
+    }
+  }
+  
+});
+
+const userTypeToken = new GraphQLObjectType({
+    name: 'userToken',
+    fields:{
+      email: {
+          type: GraphQLString
+      },
+      token: {
+          type: GraphQLString
+      },
       _id: {
         type: GraphQLString
-      },
-      email: {
-        type: GraphQLString
-      }
+      }     
     }
+});
+
+const userPaginationType = new GraphQLObjectType({
+  name: 'userPaginationType',
+  fields:{
+    total: {
+        type: GraphQLInt
+    },
+    users: {
+        type: new GraphQLList(userType)
+    },    
   }
 });
 
-exports.userTypeToken = new GraphQLObjectType({
-    name: 'userToken',
-    fields: function () {
-        return {
-            email: {
-                type: GraphQLString
-            },
-            token: {
-                type: GraphQLString
-            }
-        }
-    }
-});
+module.exports = {
+  userType,
+  userTypeToken,
+  userPaginationType
+}
