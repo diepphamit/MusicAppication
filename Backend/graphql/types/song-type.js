@@ -11,7 +11,7 @@ const songType = new GraphQLObjectType({
   name: 'song',
   fields: {
     id: {
-      type: GraphQLID
+      type: GraphQLInt
     },
     title_short: {
       type: GraphQLString
