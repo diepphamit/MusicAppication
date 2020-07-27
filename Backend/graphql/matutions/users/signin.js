@@ -40,7 +40,7 @@ exports.signin = {
     return {
         token: token,
         email: user.email,
-        id: user._id
+        _id: user._id
     };
   }
 }

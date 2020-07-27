@@ -30,6 +30,7 @@
         <div class="carousel-caption">
             <h3>Title Goes Here</h3>
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+            <p *ngFor="let item of itemsAsync | async"> {{item.id}}</p>
         </div>
     </ng-template>
     <ng-template ngbSlide>
