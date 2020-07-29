@@ -1,9 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { Apollo } from 'apollo-angular';
+
 import {NgbCarouselConfig} from '@ng-bootstrap/ng-bootstrap';
-import { SongService } from '../services/song.service';
+
+import { Apollo } from 'apollo-angular';
+
 import { Observable } from 'rxjs';
 import { map, tap, debounceTime } from 'rxjs/operators';
+
+import { SongService } from '../services/song.service';
 
 @Component({
   selector: 'app-home',
@@ -14,12 +18,13 @@ import { map, tap, debounceTime } from 'rxjs/operators';
 export class HomeComponent implements OnInit {
   itemsAsync: Observable<any[]>;
   total: any;
+  showFirst;
   constructor(config: NgbCarouselConfig, private songService: SongService, private apollo: Apollo) {
 
   }
 
   ngOnInit(): void {
-    this.itemsAsync = this.songService.getAllSongs(5, 2)
+    this.itemsAsync = this.songService.getAllSongs(6, 0)
                       .pipe(
                         tap(respone => this.total = respone.data.songs.total),
                         map(({data}) => data.songs.songs)
