@@ -45,14 +45,6 @@
                             <span class="material-icons">
                                 favorite_border
                             </span>
-                            <!-- <span (click)="showFirst=!showFirst">
-                                <span class="material-icons" *ngIf="!showFirst">
-                                    play_circle_outline
-                                </span>
-                            <i class="material-icons" *ngIf="showFirst">
-                                    pause_circle_outline
-                            </i>
-                            </span> -->
                             <span>
                                 <audio controls style="width: 85%;height: 50%;">
                                     <source src="{{item.preview}}" type="audio/mpeg">
@@ -65,38 +57,49 @@
                 </div>
             </div>
 
+            <nav aria-label="Page navigation example" style="margin-left: 40%;">
+                <ul class="pagination">
+                    <li class="page-item">
+                        <a class="page-link" href="#" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                    </li>
+
+                    <li *ngFor="let item of getarrayPageNumber(total);let in=index" [ngClass]="in === activeElement ? 'active' : 'none'" (click)="selectedItem(in)">
+                        <a class=" page-link " (click)="getListSongsPagination(in) ">{{in+1}}</a>
+                    </li>
+
+                    <li class="page-item ">
+                        <a class="page-link " href="# " aria-label="Next ">
+                            <span aria-hidden="true ">&raquo;</span>
+                            <span class="sr-only ">Next</span>
+                        </a>
+                    </li>
+                </ul>
+
+            </nav>
+
         </div>
         <!-- gj============ -->
         <div class="col-md-4 ">
             <strong class=" header ">Album</strong>
-            <table class="table table-hover">
+            <table class="table table-hover ">
 
                 <tbody>
-                    <tr class="row " style="margin-top:7px;padding-bottom: 5px;border-bottom: 1px solid brown ; ">
-                        <div class="col-md-3 "><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/1200px-Image_created_with_a_mobile_phone.png " alt=" " height="8% " width="100% " style="border-radius:50%; "></div>
+                    <tr class="row listalbum" *ngFor="let album of albumAsync  | async">
+                        <div class="col-md-3 "><img src="{{album.cover_medium}} " alt=" " height="33% " width="110% " style="border-radius:50%; "></div>
                         <div class="col-md-9 ">
 
                             <div style="margin-left: 10%;margin-top: 10%; ">
-                                <strong>title</strong><br>
+                                <strong>{{album.title}}</strong><br>
                                 <label for=" ">author</label>
                             </div>
 
                         </div>
 
                     </tr>
-                    <tr class="row " style="margin-top:7px;padding-bottom: 5px;border-bottom: 1px solid brown ; ">
-                        <div class="col-md-3 "><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/1200px-Image_created_with_a_mobile_phone.png " alt=" " height="8% " width="100% " style="border-radius:50%; "></div>
-                        <div class="col-md-9 ">
 
-                            <div style="margin-left: 10%;margin-top: 10%; ">
-                                <strong>title</strong><br>
-                                <label for=" ">author</label>
-                            </div>
-
-
-                        </div>
-
-                    </tr>
                 </tbody>
             </table>
         </div>
@@ -104,20 +107,20 @@
     </div>
 </div>
 
-<div class="music">
+<div class="music ">
 
-    <div class="row">
+    <div class="row ">
 
         <h2>List trash</h2>
-        <table class="table table-hover">
+        <table class="table table-hover ">
 
             <tbody>
-                <tr class="rowoftable">
+                <tr class="rowoftable ">
                     <td><span>1</span><span><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/1200px-Image_created_with_a_mobile_phone.png " alt=" " height="10% " width="10% " style="border-radius:2%; "></span>
                         <span>Con chó con</span>
                         <span>Tác giả</span>
                         <span>Thời lượng</span>
-                        <span class="material-icons" style="color: red;">
+                        <span class="material-icons " style="color: red; ">
                             favorite
                             </span>
                     </td>

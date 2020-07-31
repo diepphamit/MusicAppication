@@ -40,6 +40,11 @@ ngb-carousel img {
     outline: none;
 }
 
+.active {
+    background-color: green;
+    color: red;
+}
+
 ngb-carousel {
     width: inherit;
     height: inherit;
@@ -77,6 +82,12 @@ ngb-carousel {
 
 .album {
     /* border-bottom: 3px solid green; */
+}
+
+.listalbum {
+    margin-top: 14px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid brown;
 }
 
 .music {
