@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {MatDialog} from '@angular/material/dialog';
 
 import { NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
 
@@ -7,9 +8,9 @@ import { Apollo } from 'apollo-angular';
 import { Observable } from 'rxjs';
 import { map, tap, debounceTime } from 'rxjs/operators';
 
+import { DialogComponent } from '../dialog/dialog.component';
 import { AlbumService } from '../services/album.service';
 import { SongService } from '../services/song.service';
-
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -24,7 +25,7 @@ export class HomeComponent implements OnInit {
   showFirst;
 
 
-  constructor(config: NgbCarouselConfig, private songService: SongService, private apollo: Apollo, private albumService: AlbumService) {
+  constructor(config: NgbCarouselConfig, private songService: SongService, private apollo: Apollo, private albumService: AlbumService,public dialog: MatDialog) {
 
   }
   public activeElement = 0;
@@ -38,6 +39,13 @@ export class HomeComponent implements OnInit {
 
     this.addFavoriteSong('5f16863a0a67093742b0bf7d', 854914402);
 
+  }
+  openDialog() {
+    const dialogRef = this.dialog.open(DialogComponent);
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
   }
   getListSongs() {
     this.itemsAsync = this.songService.getAllSongs(6, 0)
@@ -91,3 +99,5 @@ export class HomeComponent implements OnInit {
   }
 
 }
+
+

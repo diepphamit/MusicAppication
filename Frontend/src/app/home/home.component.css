@@ -146,3 +146,10 @@ ngb-carousel {
     visibility: visible;
     opacity: 10;
 }
+
+.showmore {
+    float: right;
+    border: 1px solid white;
+    background-color: white;
+    border-bottom: 1px solid green;
+}

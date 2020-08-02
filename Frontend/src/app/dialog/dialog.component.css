@@ -1,0 +1,12 @@
+.listalbum {
+    font-family: 'Courier New', Courier, monospace;
+    border: 3px solid olivedrab;
+}
+
+h1 {
+    font-size: 39px;
+    color: orange;
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: 100px;
+    text-align: center;
+}
