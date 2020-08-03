@@ -1,8 +1,11 @@
 'use strict';
 
-import gql from 'graphql-tag';
 import { Injectable } from '@angular/core';
+
+import gql from 'graphql-tag';
+
 import { Observable } from 'rxjs';
+
 import { Apollo } from 'apollo-angular';
 
 @Injectable()
@@ -15,7 +18,10 @@ export class SongService {
       songs(take:${pageSize}, skip:${pageNumber}){
         total,
         songs{
-          id
+          id,
+          title_short,
+          preview,
+          rank
         }
       }
      }`;

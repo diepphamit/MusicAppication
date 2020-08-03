@@ -1,3 +1,35 @@
+.image {
+    text-align: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -17%;
+    margin-left: -15%;
+    -webkit-animation: spin 4s linear infinite;
+    -moz-animation: spin 4s linear infinite;
+    animation: spin 4s linear infinite;
+    border-radius: 50%;
+}
+
+@-moz-keyframes spin {
+    100% {
+        -moz-transform: rotate(360deg);
+    }
+}
+
+@-webkit-keyframes spin {
+    100% {
+        -webkit-transform: rotate(360deg);
+    }
+}
+
+@keyframes spin {
+    100% {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+    }
+}
+
 ngb-carousel {
     max-width: 700px;
     margin: 50px auto;
@@ -6,6 +38,11 @@ ngb-carousel {
 ngb-carousel img {
     width: 100%;
     outline: none;
+}
+
+.active {
+    background-color: green;
+    color: red;
 }
 
 ngb-carousel {
@@ -41,4 +78,78 @@ ngb-carousel {
 
 .carousel-indicators {
     z-index: 20;
+}
+
+.album {
+    /* border-bottom: 3px solid green; */
+}
+
+.listalbum {
+    margin-top: 14px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid brown;
+}
+
+.music {
+    width: 80%;
+    margin: auto;
+    /* border: 1px solid green; */
+}
+
+.rowoftable {
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
+}
+
+.header {
+    border-bottom: 3px solid green;
+    margin-bottom: 15px;
+    font-size: 30px;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+
+/* Parent Container */
+
+.content_img {
+    position: relative;
+    float: bottom;
+}
+
+
+/* Child Text Container */
+
+.content_img div {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    background: black;
+    color: white;
+    font-family: sans-serif;
+    opacity: 0;
+    visibility: hidden;
+    -webkit-transition: visibility 0s, opacity 0.5s linear;
+    transition: visibility 0s, opacity 0.5s linear;
+    float: bottom;
+}
+
+
+/* Hover on Parent Container */
+
+.content_img:hover {
+    cursor: pointer;
+}
+
+.content_img:hover div {
+    width: 100%;
+    height: 30%;
+    padding: 8px 15px;
+    visibility: visible;
+    opacity: 10;
+}
+
+.showmore {
+    float: right;
+    border: 1px solid white;
+    background-color: white;
+    border-bottom: 1px solid green;
 }

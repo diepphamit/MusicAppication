@@ -1,23 +1,24 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule,CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatDialogModule} from '@angular/material/dialog';
 
-import {StoreModule} from '@ngrx/store';
+import { StoreModule } from '@ngrx/store';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { GraphQLModule } from './graphql.module';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { GraphQLModule } from './graphql.module';
 
 import { FooterComponent } from './footer/footer.component';
 import { HeaderComponent } from './header/header.component';
 import { HomeComponent } from './home/home.component';
+import { AlbumService } from './services/album.service';
+import { SongService } from './services/song.service';
 import { UserComponent } from './user/user.component';
 import { SignUpComponent } from './user/sign-up/sign-up.component';
-import { SongService } from './services/song.service';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
-
+import { DialogComponent } from './dialog/dialog.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     FooterComponent,
     SignUpComponent,
     UserComponent,
-    HomeComponent
+    HomeComponent,
+    DialogComponent
   ],
   imports: [
     BrowserModule,
@@ -34,11 +36,13 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     StoreModule,
     NgbModule,
     GraphQLModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatDialogModule,
+    
   ],
-  schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [
-    SongService
+    SongService, AlbumService
   ],
   bootstrap: [AppComponent]
 })
