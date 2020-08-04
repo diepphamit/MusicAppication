@@ -60,6 +60,7 @@ export class HomeComponent implements OnInit {
     });
 
 
+
   }
 
   getAllAlbums() {
@@ -70,11 +71,12 @@ export class HomeComponent implements OnInit {
       );
 
     this.albumAsync.subscribe(data => {
-      console.log('bgjhhhhhhhhhhhhhj');
+     
       console.log(data);
        console.log(this.total);
     });
-
+    console.log('bgjhhhhhhhhhhhhhj');
+    console.log(this.total);
   }
   getListSongsPagination(number) {
     this.itemsAsync = this.songService.getAllSongs(6, number)

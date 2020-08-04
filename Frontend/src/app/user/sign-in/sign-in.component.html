@@ -9,6 +9,9 @@
 
         <!-- Form -->
         <form class="text-center" [formGroup]="loginForm" (ngSubmit)="onSubmitLogin()" style="color: #757575;" action="#!">
+            <div class="form-group text-center message">
+                <span *ngIf="message.length > 0" class="register modal-dialog ">{{ message }}</span>
+            </div>
 
             <!-- Email -->
             <div class="form-group">
@@ -38,6 +41,7 @@
             <p>Not a member?
                 <a href="">Register</a>
             </p>
+
 
         </form>
 
