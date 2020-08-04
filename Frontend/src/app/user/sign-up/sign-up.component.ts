@@ -12,8 +12,8 @@ import { UserService } from 'src/app/services/user.service';
 export class SignUpComponent implements OnInit {
   registerForm: FormGroup;
   submitted = false;
-  loading = false;
-  constructor(private formBuilder: FormBuilder, private route: Router,private userService: UserService) { }
+  notification;
+  constructor(private formBuilder: FormBuilder, private route: Router, private userService: UserService) { }
 
   ngOnInit(): void {
     this.registerForm = this.formBuilder.group({
@@ -24,12 +24,10 @@ export class SignUpComponent implements OnInit {
       validators: MustMatch('password', 'confirmPassword')
     });
 
-    this.register("nthaaaaaaaaaaaaa@gmail.com","123456789");
+   
   }
 
-  register(email, password) {
-    this.userService.register(email, password).subscribe(data => console.log('register successfully'));
-  }
+  
   get f() {
     return this.registerForm.controls;
   }
@@ -38,26 +36,46 @@ export class SignUpComponent implements OnInit {
     if (this.registerForm.invalid) {
       return;
     }
-    this.loading = true;
+    this.userService.register(this.registerForm.value.email, this.registerForm.value.password).subscribe(data => {
+      console.log('register successfully');
+      this.route.navigate(['login'], { queryParams: { registered: 'true' } });
+    }, error => {
+      console.log(error);
+      this.showNotification();
+    });
+
   }
+  showNotification() {
+    this.notification = { message: 'Email đã được đăng ký!' };
+  }
+  hideNotification() {
+    this.notification = { message: '' };
+  }
+  onReset() {
+    this.hideNotification();
+    this.submitted = false;
+    this.registerForm.reset();
+  }
+
+
 
 }
 export function MustMatch(controlName: string, matchingControlName: string) {
   return (formGroup: FormGroup) => {
-      const control = formGroup.controls[controlName];
-      const matchingControl = formGroup.controls[matchingControlName];
+    const control = formGroup.controls[controlName];
+    const matchingControl = formGroup.controls[matchingControlName];
 
-      if (matchingControl.errors && !matchingControl.errors.mustMatch) {
-          // return if another validator has already found an error on the matchingControl
-          return;
-      }
+    if (matchingControl.errors && !matchingControl.errors.mustMatch) {
+      // return if another validator has already found an error on the matchingControl
+      return;
+    }
 
-      // set error on matchingControl if validation fails
-      if (control.value !== matchingControl.value) {
-          matchingControl.setErrors({ mustMatch: true });
-      } else {
-          matchingControl.setErrors(null);
-      }
+    // set error on matchingControl if validation fails
+    if (control.value !== matchingControl.value) {
+      matchingControl.setErrors({ mustMatch: true });
+    } else {
+      matchingControl.setErrors(null);
+    }
   }
 }
 
