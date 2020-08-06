@@ -153,3 +153,20 @@ ngb-carousel {
     background-color: white;
     border-bottom: 1px solid green;
 }
+
+.footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 7%;
+    /* Height of the footer */
+    background: #6cf;
+}
+
+.navv {
+    bottom: 0;
+    width: 100%;
+    height: 8%;
+    /* Height of the footer */
+    background: #6cf;
+}

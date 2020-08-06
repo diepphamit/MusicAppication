@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {MatDialog} from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 
 import { NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
 
@@ -23,9 +23,11 @@ export class HomeComponent implements OnInit {
   total: any;
   totalalbum;
   showFirst;
+  user=null;
 
 
-  constructor(config: NgbCarouselConfig, private songService: SongService, private apollo: Apollo, private albumService: AlbumService,public dialog: MatDialog) {
+
+  constructor(config: NgbCarouselConfig, private songService: SongService, private apollo: Apollo, private albumService: AlbumService, public dialog: MatDialog) {
 
   }
   public activeElement = 0;
@@ -38,8 +40,11 @@ export class HomeComponent implements OnInit {
     this.getAllAlbums();
 
     this.addFavoriteSong('5f16863a0a67093742b0bf7d', 854914402);
-
+    this.user = JSON.parse(localStorage.getItem('currentUser'));
+    console.log("iuoioioio" + this.user);
+    
   }
+ 
   openDialog() {
     const dialogRef = this.dialog.open(DialogComponent);
 
@@ -71,12 +76,12 @@ export class HomeComponent implements OnInit {
       );
 
     this.albumAsync.subscribe(data => {
-     
+
       console.log(data);
-       console.log(this.total);
+      console.log(this.total);
     });
-    console.log('bgjhhhhhhhhhhhhhj');
-    console.log(this.total);
+
+
   }
   getListSongsPagination(number) {
     this.itemsAsync = this.songService.getAllSongs(6, number)

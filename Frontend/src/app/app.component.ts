@@ -1,3 +1,4 @@
+import { isLoweredSymbol } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -9,8 +10,10 @@ export class AppComponent implements OnInit {
   storedTheme: string = localStorage.getItem('theme-color');
   title = 'music';
  
-  ngOnInit() { }
-  
+  ngOnInit() {
+    
+  }
+
   setTheme() {
     if (this.storedTheme === 'theme-dark') {
       localStorage.setItem('theme-color', 'theme-light');

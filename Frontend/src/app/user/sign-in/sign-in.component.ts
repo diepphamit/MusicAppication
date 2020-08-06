@@ -50,14 +50,21 @@ export class SignInComponent implements OnInit {
       map(({ data }) => data.signin)
     );
     this.user.subscribe(data => {
-      console.log(data.email);
-      localStorage.setItem("currentUser",JSON.stringify(data));
+     // console.log(data);
+      localStorage.setItem("currentUser", JSON.stringify(data));
       localStorage.setItem("auth_token", data.token);
       this.router.navigateByUrl('/');
-
+    }, (err: any) => {
+      console.log(err);
+      this.showNotification();
     });
     
+
   }
+  showNotification() {
+    this.notification = { message: 'Email hoặc mật khẩu không đúng!' };
+  }
+
 
 }
 
