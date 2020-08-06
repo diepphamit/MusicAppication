@@ -5,8 +5,6 @@ import { HomeComponent } from './home/home.component';
 import { UserComponent } from './user/user.component';
 import { SignInComponent } from './user/sign-in/sign-in.component';
 import { SignUpComponent } from './user/sign-up/sign-up.component';
-
-
 const routes: Routes = [
   {
     path: 'signup', component: UserComponent,

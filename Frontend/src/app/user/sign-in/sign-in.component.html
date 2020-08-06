@@ -1,22 +1,3 @@
-<!-- <form class="col-md-12">
-    <div class="row">
-        <div class="col-md-12">
-            <span class="material-icons prefix">account_circle </span>
-            <input type="text" name="UserName" placeholder="Username" required>
-        </div>
-
-        <div class="col-md-12">
-            <i class="material-icons prefix">vpn_key</i>
-            <input type="password" name="Password" placeholder="Password" required>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <button class="btn-large btn-submit" type="submit">Sign in</button>
-        </div>
-    </div>
-</form> -->
-
 <div class="card">
 
     <h5 class="card-header info-color white-text text-center py-4">
@@ -27,59 +8,48 @@
     <div class="card-body px-lg-5 pt-0">
 
         <!-- Form -->
-        <form class="text-center" style="color: #757575;" action="#!">
+        <form class="text-center" [formGroup]="loginForm" (ngSubmit)="onSubmitLogin()" style="color: #757575;" action="#!">
+            <div class="form-group text-center message">
+                <span *ngIf="message.length > 0" class="register modal-dialog ">{{ message }}</span>
+            </div>
 
             <!-- Email -->
-            <div class="md-form">
-                <input type="email" id="materialLoginFormEmail" class="form-control">
-                <label for="materialLoginFormEmail">E-mail</label>
+            <div class="form-group">
+                <label for="materialLoginFormEmail">E-mail:</label>
+                <input type="email" id="materialLoginFormEmail" formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.email.errors }">
+                <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                    <div *ngIf="f.email.errors.required">Trường này bắt buộc</div>
+                    <div *ngIf="f.email.errors.email">Vui lòng nhập email đúng định dạng</div>
+                </div>
+
             </div>
 
             <!-- Password -->
             <div class="md-form">
-                <input type="password" id="materialLoginFormPassword" class="form-control">
-                <label for="materialLoginFormPassword">Password</label>
+                <label for="materialLoginFormPassword">Password:</label>
+                <input type="password" id="materialLoginFormPassword" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }">
+                <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                    <div *ngIf="f.password.errors.required">Trường này bắt buộc</div>
+                    <div *ngIf="f.password.errors.pattern || f.password.errors.minlength ">Nhập mật khẩu ít nhất 9 ký tự</div>
+                </div>
+
             </div>
 
-            <div class="d-flex justify-content-around">
-                <div>
-                    <!-- Remember me -->
-                    <div class="form-check">
-                        <input type="checkbox" class="form-check-input" id="materialLoginFormRemember">
-                        <label class="form-check-label" for="materialLoginFormRemember">Remember me</label>
-                    </div>
-                </div>
-                <div>
-                    <!-- Forgot password -->
-                    <a href="">Forgot password?</a>
-                </div>
-            </div>
 
             <!-- Sign in button -->
             <button class="btn btn-outline-info btn-rounded btn-block my-4 waves-effect z-depth-0" type="submit">Sign in</button>
-
-            <!-- Register -->
             <p>Not a member?
-                <a href="">Register</a>
+                <a [routerLink]="['/signup']" routerLinkActive="router-link-active">Register</a>
             </p>
+            <div class="form-group text-center err">
+                <span *ngIf="notification " class="elementToFadeInAndOut modal-dialog ">
+                     {{notification.message}}
+                </span>
+            </div>
 
-            <!-- Social login -->
-            <p>or sign in with:</p>
-            <a type="button" class="btn-floating btn-fb btn-sm">
-                <i class="fab fa-facebook-f"></i>
-            </a>
-            <a type="button" class="btn-floating btn-tw btn-sm">
-                <i class="fab fa-twitter"></i>
-            </a>
-            <a type="button" class="btn-floating btn-li btn-sm">
-                <i class="fab fa-linkedin-in"></i>
-            </a>
-            <a type="button" class="btn-floating btn-git btn-sm">
-                <i class="fab fa-github"></i>
-            </a>
 
         </form>
-        <!-- Form -->
+
 
     </div>
 

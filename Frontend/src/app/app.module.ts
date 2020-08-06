@@ -3,6 +3,7 @@ import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDialogModule} from '@angular/material/dialog';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 import { StoreModule } from '@ngrx/store';
 
@@ -20,6 +21,7 @@ import { AlbumService } from './services/album.service';
 import { SongService } from './services/song.service';
 import {UserService} from './services/user.service';
 import { UserComponent } from './user/user.component';
+import { SignInComponent } from './user/sign-in/sign-in.component';
 import { SignUpComponent } from './user/sign-up/sign-up.component';
 @NgModule({
   declarations: [
@@ -29,7 +31,8 @@ import { SignUpComponent } from './user/sign-up/sign-up.component';
     SignUpComponent,
     UserComponent,
     HomeComponent,
-    DialogComponent
+    DialogComponent,
+    SignInComponent
   ],
   imports: [
     BrowserModule,
@@ -41,6 +44,7 @@ import { SignUpComponent } from './user/sign-up/sign-up.component';
     MatDialogModule,
     FormsModule,
     ReactiveFormsModule,
+    CommonModule
 
     
   ],
