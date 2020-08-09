@@ -24,6 +24,7 @@ export class HeaderComponent implements OnInit {
     if (this.user2 !== null) {
       this.isAuthentication = true;
     }
+    
    
   }
   Logout() {
@@ -32,7 +33,7 @@ export class HeaderComponent implements OnInit {
     this.router.navigateByUrl('/');
     this.user2 = null;
     this.isAuthentication = false;
-
+   
   }
 
 

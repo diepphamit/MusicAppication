@@ -45,9 +45,12 @@
                         <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/1200px-Image_created_with_a_mobile_phone.png" alt="" height="60%" width="100%" style="border-radius:2%;">
 
                         <div>
-                            <span class="material-icons">
+
+
+                            <span class="material-icons" (click)="addFavoriteSong(user._id,item.id)">
                                 favorite_border
                             </span>
+
                             <span>
                                 <audio controls style="width: 85%;height: 50%;">
                                     <source src="{{item.preview}}" type="audio/mpeg">
@@ -87,7 +90,7 @@
         <!-- gj============ -->
         <div class="col-md-4 ">
             <strong class=" header ">Album</strong>
-            <table class="table table-hover ">
+            <table class="table table-hover forAlbum ">
 
                 <tbody>
                     <tr class="row listalbum" *ngFor="let album of albumAsync  | async">
@@ -115,26 +118,41 @@
 
     <div class="row ">
 
-        <h2>List trash</h2>
+        <strong class=" header " style="margin-left: 1%; margin-bottom: 2%;">My Favorite Songs</strong>
         <table class="table table-hover ">
 
             <tbody>
-                <tr class="rowoftable ">
-                    <td><span>1</span><span><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/1200px-Image_created_with_a_mobile_phone.png " alt=" " height="10% " width="10% " style="border-radius:2%; "></span>
-                        <span>Con chó con</span>
-                        <span>Tác giả</span>
-                        <span>Thời lượng</span>
-                        <span class="material-icons " style="color: red; ">
-                            favorite
-                            </span>
+                <tr class="rowoftable " *ngFor="let fs of fsongsAsync | async">
+
+                    <td><span>{{index+1}}</span>
+                        <span style="margin-left:5%;font-size: larger;">{{fs.title_short}}</span>
+                        <span style="margin-left:5%;">
+                            <audio controls style="width: 120%;height: 100%;padding-bottom: 4%;margin-top: 1%;">
+                                <source src="{{fs.preview}}" type="audio/mpeg">
+                            </audio>
+                        </span>
+
+
                     </td>
+                    <td><span class="material-icons " style="color: red;font-size: 50px; margin-left: 60%;">
+                        favorite
+                        </span></td>
                 </tr>
 
             </tbody>
         </table>
 
     </div>
+    <!-- <ng-template #block>
+        <div style="width: 100%;color: red;font-size: 30px; height: 100%px;">
+            <marquee direction="right">There are no songs in your playlist<img src="assets/small.gif" /></marquee>
+        </div>
+
+
+    </ng-template> -->
+
 </div>
+
 <div class="footer">
     <app-footer></app-footer>
 </div>

@@ -90,9 +90,16 @@ ngb-carousel {
     border-bottom: 1px solid brown;
 }
 
+.listalbumm {
+    margin-top: 14px;
+    padding-bottom: 5px;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
+}
+
 .music {
     width: 80%;
     margin: auto;
+    margin-top: 3%;
     /* border: 1px solid green; */
 }
 
@@ -100,10 +107,14 @@ ngb-carousel {
     box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
 }
 
+.forAlbum tr {
+    border: 2px solid black;
+}
+
 .header {
     border-bottom: 3px solid green;
     margin-bottom: 15px;
-    font-size: 30px;
+    font-size: 35px;
     font-family: 'Courier New', Courier, monospace;
 }
 

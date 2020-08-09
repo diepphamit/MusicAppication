@@ -23,6 +23,7 @@ import {UserService} from './services/user.service';
 import { UserComponent } from './user/user.component';
 import { SignInComponent } from './user/sign-in/sign-in.component';
 import { SignUpComponent } from './user/sign-up/sign-up.component';
+import { SongsAlbumComponent } from './home/songs-album/songs-album.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -32,7 +33,8 @@ import { SignUpComponent } from './user/sign-up/sign-up.component';
     UserComponent,
     HomeComponent,
     DialogComponent,
-    SignInComponent
+    SignInComponent,
+    SongsAlbumComponent
   ],
   imports: [
     BrowserModule,
