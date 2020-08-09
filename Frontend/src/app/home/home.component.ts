@@ -113,6 +113,13 @@ export class HomeComponent implements OnInit {
     // mà subcribe ra chi.
     //vô lý thật sự :))
     //fix được cái bất đồng bộ khi nãy vhuwf để thêm 1 cái vô lý :))
+    //lúc này là mi bị cái chỗ observable là nó chạy bất dồng bộ. còn subcribe là lện nó chờ cho đến 
+    //khi nó thực hiện lện nớ xong mới chạy cái khác..nếu để subcribe là nó ra dc list vì m có câu lệnh
+    //ngIf á..subcribe thì total > 0.. còn không có subcribe total đương nhiên < 0.
+    //với lại t không hiểu tại sao fix rồi add vô rồi mà ren k ra dc..hơi vô lý chỗ ni...bởi nên m coi
+    //cẩn thận dùng cái bất đồng bộ
+    //push code lên t fix cho nhé..về máy t mới debug dể hơn
+    //ok ok merge vô dev pk. đừng mer ừ// xem luôn cái
 
   }
   getarrayPageNumber(count) {
