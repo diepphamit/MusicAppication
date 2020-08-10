@@ -36,6 +36,7 @@
     "graphql": "^15.3.0",
     "graphql-tag": "^2.10.4",
     "gulp": "^4.0.2",
+    "ngx-audio-player": "^9.1.1",
     "rxjs": "~6.5.5",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.3"

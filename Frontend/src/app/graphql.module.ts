@@ -7,8 +7,8 @@ import { HttpLinkModule, HttpLink } from 'apollo-angular-link-http';
 
 import { InMemoryCache } from 'apollo-cache-inmemory';
 
-//const uri = 'http://localhost:3000/graphql'; // Development
-const uri='http://52.221.253.191:8888/graphql';
+const uri = 'http://localhost:3000/graphql'; // Development
+//const uri='http://52.221.253.191:8888/graphql';
 @NgModule({
   exports: [
     HttpClientModule,

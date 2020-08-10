@@ -28,6 +28,7 @@ export class HomeComponent implements OnInit {
   user = null;
   islogin = false;
   fsongsAsync: Observable<any[]>;
+  
 
   constructor(config: NgbCarouselConfig, private songService: SongService, private apollo: Apollo, private albumService: AlbumService, public dialog: MatDialog) {
 
@@ -137,6 +138,7 @@ export class HomeComponent implements OnInit {
     });
    
   }
+ 
 
 }
 

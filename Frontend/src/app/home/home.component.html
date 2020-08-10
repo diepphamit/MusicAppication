@@ -1,7 +1,7 @@
 <div class="navv">
     <app-header></app-header>
 </div>
-<div>
+<!-- <div>
     <button (click)="showFirst=!showFirst"></button>
     <div *ngIf="!showFirst">
         <ngb-carousel [showNavigationArrows]="true" [showNavigationIndicators]="true" interval="12000" [keyboard]="true" [pauseOnHover]="true" [wrap]="true" [activeId]="'secondSlide'">
@@ -30,22 +30,21 @@
         <i class="glyphicon glyphicon-record" style="float: right;">ghj</i>
         <img class="image" src="http://i.stack.imgur.com/pC1Tv.jpg" alt="" width="400px" height="400px">
     </div>
-</div>
+</div> -->
 <div class="music">
 
     <div class="row">
         <div class="col-md-8">
             <strong class="header">List </strong>
-            <div class="row" style="margin-top:7px">
+            <div class="row">
 
                 <div class="col-md-4" *ngFor="let item of itemsAsync | async">
 
                     <div class="onerow content_img">
 
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/1200px-Image_created_with_a_mobile_phone.png" alt="" height="60%" width="100%" style="border-radius:2%;">
+                        <img src="assets/music.jpg" alt="" height="110%" width="100%" style="border-radius:2%;">
 
                         <div>
-
 
                             <span class="material-icons" (click)="addFavoriteSong(user._id,item.id)">
                                 favorite_border
@@ -59,11 +58,11 @@
 
                         </div>
                     </div>
-                    <label for="">  {{item.title_short}}</label>
+                    <label for="" style="font-size: 20px;margin-top: 4%;">  {{item.title_short}}</label>
                 </div>
             </div>
 
-            <nav aria-label="Page navigation example" style="margin-left: 40%;">
+            <nav aria-label="Page navigation example" style="margin-left: 40%;margin-top: 3%;">
                 <ul class="pagination">
                     <li class="page-item">
                         <a class="page-link" href="#" aria-label="Previous">
@@ -93,18 +92,18 @@
             <table class="table table-hover forAlbum ">
 
                 <tbody>
+
                     <tr class="row listalbum" *ngFor="let album of albumAsync  | async">
-                        <div class="col-md-3 "><img src="{{album.cover_medium}} " alt=" " height="33% " width="110% " style="border-radius:50%; "></div>
-                        <div class="col-md-9 ">
+                        <a [routerLink]="['/songsAlbum',album.albumId]" routerLinkActive="router-link-active">
+                            <span class="col-md-6 "><img src="{{album.cover_medium}} " alt=" " height="32% " width="20% " style="border-radius:50%; "></span>
+                            <span class="col-md-6 ">
+                                <strong>{{album.title}}{{album.albumId}}</strong><br>
+                            </span>
+                        </a>
 
-                            <div style="margin-left: 10%;margin-top: 10%; ">
-                                <strong>{{album.title}}</strong><br>
-
-                            </div>
-
-                        </div>
 
                     </tr>
+
 
                 </tbody>
             </table>
@@ -122,7 +121,7 @@
         <table class="table table-hover " *ngIf="totalfs>0;else block">
 
             <tbody>
-                <tr class="rowoftable " *ngFor="let fs of fsongsAsync | async">
+                <tr class="rowoftable " *ngFor="let fs of fsongsAsync | async;let index=index">
 
                     <td><span>{{index+1}}</span>
                         <span style="margin-left:5%;font-size: larger;">{{fs.title_short}}</span>

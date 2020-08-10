@@ -9,6 +9,8 @@ import { StoreModule } from '@ngrx/store';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
+import { NgxAudioPlayerModule } from 'ngx-audio-player';
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { GraphQLModule } from './graphql.module';
@@ -21,9 +23,9 @@ import { AlbumService } from './services/album.service';
 import { SongService } from './services/song.service';
 import {UserService} from './services/user.service';
 import { UserComponent } from './user/user.component';
+import { SongsAlbumComponent } from './home/songs-album/songs-album.component';
 import { SignInComponent } from './user/sign-in/sign-in.component';
 import { SignUpComponent } from './user/sign-up/sign-up.component';
-import { SongsAlbumComponent } from './home/songs-album/songs-album.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -46,7 +48,8 @@ import { SongsAlbumComponent } from './home/songs-album/songs-album.component';
     MatDialogModule,
     FormsModule,
     ReactiveFormsModule,
-    CommonModule
+    CommonModule,
+    NgxAudioPlayerModule,
 
     
   ],
