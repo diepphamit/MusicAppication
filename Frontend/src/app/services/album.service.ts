@@ -31,6 +31,19 @@ export class AlbumService {
 
     return this.apollo.watchQuery({ query: albumsQuery }).valueChanges;
   }
+  getSongsAlbum(albumId,pageSize, pageNumber): Observable<any>{
+    const songsA=gql`query{
+      songsAlbum(albumId:${albumId},take:${pageSize},skip:${pageNumber}){
+        total,
+        songs{
+          title_short,
+          preview,
+         
+        }
+      }
+    }`;
+    return this.apollo.watchQuery({ query: songsA }).valueChanges;
+  }
 
   
 }

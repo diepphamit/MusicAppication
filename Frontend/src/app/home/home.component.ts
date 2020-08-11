@@ -28,8 +28,8 @@ export class HomeComponent implements OnInit {
   user = null;
   islogin = false;
   fsongsAsync: Observable<any[]>;
+  isShow=false;
   
-
   constructor(config: NgbCarouselConfig, private songService: SongService, private apollo: Apollo, private albumService: AlbumService, public dialog: MatDialog) {
 
   }
@@ -48,7 +48,10 @@ export class HomeComponent implements OnInit {
     // }
 
   }
-
+  
+  toggle(){
+    alert("hello");
+  }
   openDialog() {
     const dialogRef = this.dialog.open(DialogComponent);
 
@@ -63,11 +66,6 @@ export class HomeComponent implements OnInit {
         map(({ data }) => data.songs.songs)
       );
 
-    // this.itemsAsync.subscribe(data => {
-    //   console.log(data); console.log(this.total);
-
-    // });
-
   }
 
   getAllAlbums() {
@@ -76,13 +74,6 @@ export class HomeComponent implements OnInit {
         tap(respone => this.total = respone.data.albums.total),
         map(({ data }) => data.albums.albums)
       );
-
-    // this.albumAsync.subscribe(data => {
-    //   console.log(data);
-    //   console.log(this.total);
-    // });
-
-
   }
   getListSongsPagination(number) {
     this.itemsAsync = this.songService.getAllSongs(6, number)
@@ -90,10 +81,6 @@ export class HomeComponent implements OnInit {
         tap(respone => this.total = respone.data.songs.total),
         map(({ data }) => data.songs.songs)
       );
-
-    // this.itemsAsync.subscribe(data => {
-    //   console.log(data);
-    // });
   }
   getFavoriteSongs(userId) {
     this.fsongsAsync = this.songService.getFavoriteSongByUserId(userId, 20, 0)

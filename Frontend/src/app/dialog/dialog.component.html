@@ -5,22 +5,22 @@
 
         <tbody>
             <tr class="row listalbum" *ngFor="let album of albumAsync  | async">
-                <div class="col-md-3 "><img src="{{album.cover_medium}} " alt=" " height="80% " width="100% " style="border-radius:50%; "></div>
-                <div class="col-md-9 ">
+                <a [routerLink]="['/songsAlbum',album.albumId,album.title,album.cover_medium]" routerLinkActive="router-link-active" style="color: black;">
 
-                    <div style="margin-left: 10%;margin-top: 10%; ">
-                        <strong style="font-size: 28px;font-family: 'Courier New', Courier, monospace;">{{album.title}}</strong>
 
-                    </div>
+                    <span class="col-md-5 "><img src="{{album.cover_medium}} " alt=" " height="150px " width="150px " style="border-radius:50%; "></span>
+                    <span class="col-md-7 ">
+                            <strong>{{album.title}}</strong>
+                    </span>
 
-                </div>
 
+                </a>
             </tr>
 
         </tbody>
     </table>
 </mat-dialog-content>
-<mat-dialog-actions align="end">
+<mat-dialog-actions>
     <button mat-button mat-dialog-close>Cancel</button>
 
 </mat-dialog-actions>

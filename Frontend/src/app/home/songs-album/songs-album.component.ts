@@ -1,49 +1,62 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 
 import { Track, MatAdvancedAudioPlayerComponent } from 'ngx-audio-player';
-
-import { SongService } from 'src/app/services/song.service';
 
 import { Apollo } from 'apollo-angular';
 
 import { Observable } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
+
+import { AlbumService } from 'src/app/services/album.service';
+export interface Type {
+  title: string;
+  link: string;
+}
 @Component({
   selector: 'app-songs-album',
   templateUrl: './songs-album.component.html',
   styleUrls: ['./songs-album.component.css']
 })
+
 export class SongsAlbumComponent implements OnInit {
-
-  constructor(private songService: SongService, private apollo: Apollo) { }
-  // playlist = [
-  //   {
-  //     title: 'Tha Kar ke',
-  //     link: 'https://funksyou.com/fileDownload/Songs/128/13080.mp3'
-  //   },
-  //   {
-  //     title: 'Golmal',
-  //     link: 'https://funksyou.com/fileDownload/Songs/128/13091.mp3'
-  //   }
-  // ];
-  playlist: Observable<any[]>;
+  songsAlbum: Observable<any[]>;
   albumId;
+  title;
+  picture;
   total: any;
+  playlist: Track[] = [];
+  msaapPageSizeOptions = [2,4,6];
 
+  constructor(private router: Router, private activatedRoute: ActivatedRoute, private albumService: AlbumService, private apollo: Apollo) {
+    this.albumId = this.activatedRoute.snapshot.params.id;
+    this.title=this.activatedRoute.snapshot.params.title;
+    this.picture=this.activatedRoute.snapshot.params.picture;
+  }
   ngOnInit(): void {
-    this.getSongsAlbum(103248);
+    console.log(this.picture);
+    this.getSongsAlbum(this.albumId);
 
   }
+
   getSongsAlbum(albumId) {
-    this.playlist = this.songService.getSongsAlbum(albumId, 10, 0)
+    this.songsAlbum = this.albumService.getSongsAlbum(albumId, 100, 0)
       .pipe(
         tap(respone => this.total = respone.data.songsAlbum.total),
-        map(({ data }) => data.songsAlbum.songs)
+        map(({ data }) => data.songsAlbum.songs),
       );
+    
 
-    this.playlist.subscribe(data => {
-      console.log('hfgd');
+    this.songsAlbum.subscribe(data => {
       console.log(data);
+      for (const item of data) {
+        this.playlist.push({
+          title: item.title_short,
+          link: item.preview
+        });
+      }
+      console.log(this.playlist);
     });
+   
   }
 }

@@ -16,10 +16,14 @@ const routes: Routes = [
     children: [{ path: '', component: SignInComponent }]
   },
   {
-    path: '', component: HomeComponent
+    path: '', component: UserComponent,
+    children: [{ path: '', component: SignInComponent }]
   },
   {
-    path: 'songsAlbum/:id', component: SongsAlbumComponent
+    path: 'home', component: HomeComponent
+  },
+  {
+    path: 'songsAlbum/:id/:title/:picture', component: SongsAlbumComponent
   }
 
 ];
