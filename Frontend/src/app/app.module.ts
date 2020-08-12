@@ -26,6 +26,8 @@ import { UserComponent } from './user/user.component';
 import { SongsAlbumComponent } from './home/songs-album/songs-album.component';
 import { SignInComponent } from './user/sign-in/sign-in.component';
 import { SignUpComponent } from './user/sign-up/sign-up.component';
+import { FavoriteSongsComponent } from './home/favorite-songs/favorite-songs.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -36,7 +38,9 @@ import { SignUpComponent } from './user/sign-up/sign-up.component';
     HomeComponent,
     DialogComponent,
     SignInComponent,
-    SongsAlbumComponent
+    SongsAlbumComponent,
+    FavoriteSongsComponent,
+    
   ],
   imports: [
     BrowserModule,

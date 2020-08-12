@@ -14,8 +14,8 @@
                 </div>
                 <div class="col-md-8">
                     <div style="width: 500px;margin-top: 5%;">
-                        <mat-advanced-audio-player [playlist]="playlist">
-                        </mat-advanced-audio-player>
+
+                        <mat-advanced-audio-player [playlist]="playlist" [displayTitle]="msaapDisplayTitle" [autoPlay]="false" muted="muted" [displayPlaylist]="playlist" [pageSizeOptions]="msaapPageSizeOptions" [displayVolumeControls]="msaapDisplayVolumeControls" [expanded]="true"></mat-advanced-audio-player>
                     </div>
                 </div>
             </div>

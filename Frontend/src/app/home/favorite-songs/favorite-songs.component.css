@@ -1,0 +1,29 @@
+.footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 7%;
+    /* Height of the footer */
+    background: #6cf;
+}
+
+.navv {
+    bottom: 0;
+    width: 100%;
+    height: 8%;
+    /* Height of the footer */
+    background: #6cf;
+}
+
+.music {
+    width: 80%;
+    margin: auto;
+    margin-top: 3%;
+    /* border: 1px solid green; */
+}
+
+.message {
+    color: olivedrab;
+    font-size: 20px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}

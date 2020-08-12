@@ -1,5 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { DomSanitizer } from '@angular/platform-browser';
+import { Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 
 import { NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
 
@@ -17,8 +20,12 @@ import { SongService } from '../services/song.service';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
   providers: [NgbCarouselConfig]  // add NgbCarouselConfig to the component providers
-})
+}
+)
 export class HomeComponent implements OnInit {
+  //@ViewChild('audio', { static: true }) audioElms: ElementRef;
+
+
   itemsAsync: Observable<any[]>;
   albumAsync: Observable<any[]>;
   total: any;
@@ -28,9 +35,10 @@ export class HomeComponent implements OnInit {
   user = null;
   islogin = false;
   fsongsAsync: Observable<any[]>;
-  isShow=false;
-  
-  constructor(config: NgbCarouselConfig, private songService: SongService, private apollo: Apollo, private albumService: AlbumService, public dialog: MatDialog) {
+  isShow = false;
+  firstName: string;
+ 
+  constructor(config: NgbCarouselConfig, private songService: SongService, private apollo: Apollo, private albumService: AlbumService, public dialog: MatDialog, private sanitize: DomSanitizer, private routeParam: ActivatedRoute, private router: Router) {
 
   }
   public activeElement = 0;
@@ -38,7 +46,10 @@ export class HomeComponent implements OnInit {
     this.activeElement = id;
   }
 
+
   ngOnInit(): void {
+   
+  
     this.user = JSON.parse(localStorage.getItem('currentUser'));
     this.getListSongs();
     this.getAllAlbums();
@@ -48,10 +59,8 @@ export class HomeComponent implements OnInit {
     // }
 
   }
-  
-  toggle(){
-    alert("hello");
-  }
+
+
   openDialog() {
     const dialogRef = this.dialog.open(DialogComponent);
 
@@ -65,7 +74,6 @@ export class HomeComponent implements OnInit {
         tap(respone => this.total = respone.data.songs.total),
         map(({ data }) => data.songs.songs)
       );
-
   }
 
   getAllAlbums() {
@@ -84,31 +92,10 @@ export class HomeComponent implements OnInit {
   }
   getFavoriteSongs(userId) {
     this.fsongsAsync = this.songService.getFavoriteSongByUserId(userId, 20, 0)
-    .pipe(
-      tap(reponse => this.totalfs = reponse.data.favoriteSongsByUser.total),
-      map(({ data }) => data.favoriteSongsByUser.songs)
-    );
-    // this.fsongsAsync.subscribe(data => {
-    //   console.log("=============");
-    //   console.log(data);
-    //   // console.log(this.totalfs);
-    // });
-    // chỗ ni hơi lạ, tại răng phải subcribe ra mới lấy dc dữ liệu. đkhông biết nữa
-    // oke..để t test lại nghe. ok ok
-    // hắn bị chạy bất đồng bộ á. nghĩa là đang chạy cái this.fsongsAsync = this.songService với chạy
-    //thí.song.subscribe cùng 1 lúc á. nghĩa là nó chưa get dữ liệu add về mà đã chạy subride nên chỉ
-    // có dữ liệu cũ.HIểu không á? ừm sơ sơ rồi fix răng :v..okeddeeer t coi..mấy hàm get ni đã chạy async rồi
-    // mà subcribe ra chi.
-    //vô lý thật sự :))
-    //fix được cái bất đồng bộ khi nãy vhuwf để thêm 1 cái vô lý :))
-    //lúc này là mi bị cái chỗ observable là nó chạy bất dồng bộ. còn subcribe là lện nó chờ cho đến 
-    //khi nó thực hiện lện nớ xong mới chạy cái khác..nếu để subcribe là nó ra dc list vì m có câu lệnh
-    //ngIf á..subcribe thì total > 0.. còn không có subcribe total đương nhiên < 0.
-    //với lại t không hiểu tại sao fix rồi add vô rồi mà ren k ra dc..hơi vô lý chỗ ni...bởi nên m coi
-    //cẩn thận dùng cái bất đồng bộ
-    //push code lên t fix cho nhé..về máy t mới debug dể hơn
-    //ok ok merge vô dev pk. đừng mer ừ// xem luôn cái
-
+      .pipe(
+        tap(reponse => this.totalfs = reponse.data.favoriteSongsByUser.total),
+        map(({ data }) => data.favoriteSongsByUser.songs)
+      );
   }
   getarrayPageNumber(count) {
     return new Array(Math.ceil(count / 6));
@@ -117,15 +104,18 @@ export class HomeComponent implements OnInit {
     this.songService.addFavoriteSongByUserId(userId, songId).subscribe(data => {
       console.log('Add favorite song successfully');
       //this.getFavoriteSongs('5f2905d08f14d320e83bd9f9');
-      this.fsongsAsync = this.songService.getFavoriteSongByUserId('5f2905d08f14d320e83bd9f9', 20, 0)
-    .pipe(
-      tap(reponse => this.totalfs = reponse.data.favoriteSongsByUser.total),
-      map(({ data }) => data.favoriteSongsByUser.songs)
-    );
+      this.fsongsAsync = this.songService.getFavoriteSongByUserId(userId, 20, 0)
+        .pipe(
+          tap(reponse => this.totalfs = reponse.data.favoriteSongsByUser.total),
+          map(({ data }) => data.favoriteSongsByUser.songs)
+        );
     });
-   
+    this.router.navigate(['favoriteSong'], { queryParams: { added: 'true' } });
+    
+
   }
- 
+
+
 
 }
 

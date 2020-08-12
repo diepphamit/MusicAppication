@@ -20,18 +20,22 @@ export interface Type {
 })
 
 export class SongsAlbumComponent implements OnInit {
+  msaapDisplayTitle = true;
+  msaapDisplayPlayList = true;
+  msaapPageSizeOptions = [2, 3, 4];
+  msaapDisplayVolumeControls = true;
   songsAlbum: Observable<any[]>;
   albumId;
   title;
   picture;
   total: any;
   playlist: Track[] = [];
-  msaapPageSizeOptions = [2,4,6];
+ 
 
   constructor(private router: Router, private activatedRoute: ActivatedRoute, private albumService: AlbumService, private apollo: Apollo) {
     this.albumId = this.activatedRoute.snapshot.params.id;
-    this.title=this.activatedRoute.snapshot.params.title;
-    this.picture=this.activatedRoute.snapshot.params.picture;
+    this.title = this.activatedRoute.snapshot.params.title;
+    this.picture = this.activatedRoute.snapshot.params.picture;
   }
   ngOnInit(): void {
     console.log(this.picture);
@@ -45,7 +49,7 @@ export class SongsAlbumComponent implements OnInit {
         tap(respone => this.total = respone.data.songsAlbum.total),
         map(({ data }) => data.songsAlbum.songs),
       );
-    
+
 
     this.songsAlbum.subscribe(data => {
       console.log(data);
@@ -57,6 +61,6 @@ export class SongsAlbumComponent implements OnInit {
       }
       console.log(this.playlist);
     });
-   
+
   }
 }

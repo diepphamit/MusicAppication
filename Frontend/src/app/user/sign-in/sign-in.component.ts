@@ -53,7 +53,7 @@ export class SignInComponent implements OnInit {
      // console.log(data);
       localStorage.setItem("currentUser", JSON.stringify(data));
       localStorage.setItem("auth_token", data.token);
-      this.router.navigateByUrl('/home');
+      this.router.navigateByUrl('/');
     }, (err: any) => {
       console.log(err);
       this.showNotification();
