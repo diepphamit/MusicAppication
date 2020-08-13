@@ -11,6 +11,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { NgxAudioPlayerModule } from 'ngx-audio-player';
 
+import { NgxPaginationModule } from 'ngx-pagination';
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { GraphQLModule } from './graphql.module';
@@ -23,10 +25,11 @@ import { AlbumService } from './services/album.service';
 import { SongService } from './services/song.service';
 import {UserService} from './services/user.service';
 import { UserComponent } from './user/user.component';
+import { FavoriteSongsComponent } from './home/favorite-songs/favorite-songs.component';
 import { SongsAlbumComponent } from './home/songs-album/songs-album.component';
 import { SignInComponent } from './user/sign-in/sign-in.component';
 import { SignUpComponent } from './user/sign-up/sign-up.component';
-import { FavoriteSongsComponent } from './home/favorite-songs/favorite-songs.component';
+
 
 @NgModule({
   declarations: [
@@ -54,6 +57,7 @@ import { FavoriteSongsComponent } from './home/favorite-songs/favorite-songs.com
     ReactiveFormsModule,
     CommonModule,
     NgxAudioPlayerModule,
+    NgxPaginationModule
 
     
   ],

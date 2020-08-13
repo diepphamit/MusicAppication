@@ -36,13 +36,17 @@
             </div>
 
             <nav aria-label="Page navigation example" style="margin-left: 40%;margin-top: 3%;">
+
                 <ul class="pagination">
 
                     <li *ngFor="let item of getarrayPageNumber(total);let in=index" [ngClass]="in === activeElement ? 'active' : 'none'" (click)="selectedItem(in)">
                         <a class=" page-link " (click)="getListSongsPagination(in) ">{{in+1}}</a>
                     </li>
+
                 </ul>
             </nav>
+
+
         </div>
         <div class="col-md-4 ">
             <strong class=" header ">Album</strong>
@@ -66,7 +70,12 @@
 
     </div>
 </div>
+<ng-template #popContent>Hello, <b>Popover</b>! content</ng-template>
+<ng-template #popTitle><i>You must login</i></ng-template>
 
+<button type="button" class="btn btn-outline-secondary" [ngbPopover]="popContent" [popoverTitle]="popTitle">
+  Popover with HTML!
+</button>
 
 <div class="footer">
     <app-footer></app-footer>

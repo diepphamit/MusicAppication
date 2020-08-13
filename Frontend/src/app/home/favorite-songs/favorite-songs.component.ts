@@ -17,9 +17,16 @@ import { SongService } from 'src/app/services/song.service';
 export class FavoriteSongsComponent implements OnInit {
   fsongsAsync: Observable<any[]>;
   user;
-  totalfs;
+  totalfs=0;
   message;
-  constructor(private apollo: Apollo, private router: Router, private routeParam: ActivatedRoute, private songService: SongService) { }
+ 
+  constructor(private apollo: Apollo, private router: Router, private routeParam: ActivatedRoute, private songService: SongService) {
+   
+  }
+  public activeElement = 0;
+  public selectedItem(id) {
+    this.activeElement = id;
+  }
 
   ngOnInit(): void {
     this.routeParam.queryParams.subscribe(params => {
@@ -30,10 +37,10 @@ export class FavoriteSongsComponent implements OnInit {
     });
     this.user = JSON.parse(localStorage.getItem('currentUser'));
 
-    this.getFavoriteSongs(this.user._id);
+    this.getFavoriteSongs();
   }
-  getFavoriteSongs(userId) {
-    this.fsongsAsync = this.songService.getFavoriteSongByUserId(userId, 20, 0)
+  getFavoriteSongs() {
+    this.fsongsAsync = this.songService.getFavoriteSongByUserId(this.user._id, 4, 0)
       .pipe(
         tap(reponse => this.totalfs = reponse.data.favoriteSongsByUser.total),
         map(({ data }) => data.favoriteSongsByUser.songs)
@@ -43,5 +50,19 @@ export class FavoriteSongsComponent implements OnInit {
     });
 
   }
+  getFavoriteSongsPagination(number) {
+    this.fsongsAsync = this.songService.getFavoriteSongByUserId(this.user._id, 4, number)
+      .pipe(
+        tap(reponse => this.totalfs = reponse.data.favoriteSongsByUser.total),
+        map(({ data }) => data.favoriteSongsByUser.songs)
+      );
+    this.fsongsAsync.subscribe(data => {
+     
 
+    });
+
+  }
+  getarrayPageNumber(count) {
+    return new Array(Math.ceil(count / 4));
+  }
 }

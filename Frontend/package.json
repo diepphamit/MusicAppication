@@ -37,6 +37,7 @@
     "gulp": "^4.0.2",
     "jquery": "^3.5.1",
     "ngx-audio-player": "^9.1.1",
+    "ngx-pagination": "^5.0.0",
     "rxjs": "~6.5.5",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.3"

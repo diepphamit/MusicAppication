@@ -80,14 +80,10 @@ ngb-carousel {
     z-index: 20;
 }
 
-.album {
-    /* border-bottom: 3px solid green; */
-}
-
 .listalbum {
     margin-top: 14px;
     padding-bottom: 5px;
-    border-bottom: 1px solid brown;
+    border-bottom: 1px solid green;
 }
 
 .listalbumm {
@@ -108,7 +104,7 @@ ngb-carousel {
 }
 
 .forAlbum tr {
-    border: 2px solid black;
+    border: 2px solid green;
 }
 
 .header {

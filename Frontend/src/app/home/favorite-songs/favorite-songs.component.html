@@ -13,7 +13,7 @@
         <table class="table table-hover " *ngIf="totalfs>0;else block">
 
             <tbody>
-                <tr class="rowoftable " *ngFor="let fs of fsongsAsync | async ;let index=index">
+                <tr class="rowoftable " *ngFor="let fs of fsongsAsync| async;let index=index ">
 
                     <td><span>{{index+1}}</span>
                         <span style="margin-left:5%;font-size: larger;">{{fs.title_short}}</span>
@@ -29,7 +29,14 @@
                         favorite
                         </span></td>
                 </tr>
+                <nav aria-label="Page navigation example" style="margin-left: 40%;margin-top: 3%;">
 
+                    <ul class="pagination">
+                        <li *ngFor="let item of getarrayPageNumber(totalfs);let in=index" [ngClass]="in === activeElement ? 'active' : 'none'" (click)="selectedItem(in)">
+                            <a class=" page-link " (click)=" getFavoriteSongsPagination(in) ">{{in+1}}</a>
+                        </li>
+                    </ul>
+                </nav>
             </tbody>
         </table>
 
