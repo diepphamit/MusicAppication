@@ -17,9 +17,9 @@
 
                         <div>
                             <a class="heart">
-                                <span class="material-icons" (click)="addFavoriteSong(user._id,item.id)">
+                                <span class="material-icons" (click)="addFavoriteSong(item.id)">
                                 favorite_border
-                            </span>
+                                </span>
                             </a>
                             <span>
                                <audio controls style="width: 85%;height: 50%;" (ended)="audioEnded()" preload="auto" #audioPlayer>    
@@ -70,12 +70,12 @@
 
     </div>
 </div>
-<ng-template #popContent>Hello, <b>Popover</b>! content</ng-template>
+<!-- <ng-template #popContent>Hello, <b>Popover</b>! content</ng-template>
 <ng-template #popTitle><i>You must login</i></ng-template>
 
 <button type="button" class="btn btn-outline-secondary" [ngbPopover]="popContent" [popoverTitle]="popTitle">
   Popover with HTML!
-</button>
+</button> -->
 
 <div class="footer">
     <app-footer></app-footer>

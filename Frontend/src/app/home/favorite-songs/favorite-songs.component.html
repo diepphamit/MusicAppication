@@ -5,9 +5,11 @@
 
     <div class="row ">
 
-        <strong class=" header " style="margin-left: 1%; margin-bottom: 2%;">My Favorite Songs</strong>
+        <strong class=" header " style="margin-left: 1%; margin-bottom: 2%;">My Favorite Songs<a [routerLink]="['/']" routerLinkActive="router-link-active"><span class="material-icons">
+            reply
+            </span></a></strong>
         <div class="form-group text-center message">
-            <span class="register modal-dialog ">{{ message }}</span>
+            <span class="register modal-dialog ">{{message }}</span>
         </div>
 
         <table class="table table-hover " *ngIf="totalfs>0;else block">
@@ -15,8 +17,8 @@
             <tbody>
                 <tr class="rowoftable " *ngFor="let fs of fsongsAsync| async;let index=index ">
 
-                    <td><span>{{index+1}}</span>
-                        <span style="margin-left:5%;font-size: larger;">{{fs.title_short}}</span>
+                    <td><span style="color: blue;">{{index+1}}</span>
+                        <span style="margin-left:5%;font-size: larger;color: blue;">{{fs.title_short}}</span>
                         <span style="margin-left:5%;">
                             <audio controls style="width: 120%;height: 100%;padding-bottom: 4%;margin-top: 1%;" >
                                 <source src="{{fs.preview}}" type="audio/mpeg">
@@ -29,23 +31,25 @@
                         favorite
                         </span></td>
                 </tr>
-                <nav aria-label="Page navigation example" style="margin-left: 40%;margin-top: 3%;">
+                <nav aria-label="Page navigation example" style="margin-left: 50%;margin-top: 3%;">
 
                     <ul class="pagination">
                         <li *ngFor="let item of getarrayPageNumber(totalfs);let in=index" [ngClass]="in === activeElement ? 'active' : 'none'" (click)="selectedItem(in)">
                             <a class=" page-link " (click)=" getFavoriteSongsPagination(in) ">{{in+1}}</a>
                         </li>
+
                     </ul>
+
                 </nav>
+
             </tbody>
         </table>
 
     </div>
     <ng-template #block>
         <div style="width: 100%;color: red;font-size: 30px; height: 100%px;">
-            <marquee direction="right">There are no songs in your playlist<img src="assets/small.gif" /></marquee>
+            <marquee direction="right">There are no songs in your playlist<img src="assets/anh.gif" /></marquee>
         </div>
-
 
     </ng-template>
 
