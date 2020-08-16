@@ -10,12 +10,15 @@
             <li class="nav-item active" *ngIf="isAuthentication===false">
                 <a class="nav-link" [routerLink]="['/login']" routerLinkActive="router-link-active">Login <span class="sr-only"></span></a>
             </li>
+            <li class="nav-item active" *ngIf="isAuthentication===true">
+                <a class="nav-link" [routerLink]="['/favoriteSong']" routerLinkActive="router-link-active">My Favorite Songs <span class="sr-only"></span></a>
+            </li>
 
         </ul>
-        <form class="form-inline">
+        <!-- <form class="form-inline">
             <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-        </form>
+        </form> -->
         <ul class="navbar-nav " *ngIf="isAuthentication===true">
 
             <li class="nav-item active">

@@ -18,18 +18,19 @@ $color-theme-dark:#fff;
 }
 
 .content.theme-dark {
-    background: green;
-    .links {
-        a {
-            color: #fff;
-        }
-    }
-    .header {
-        background-color: yellow;
-    }
-    .footer {
-        background-color: yellow;
-    }
+    background: black;
+    color: blue;
+    // .links {
+    //     a {
+    //         color: #fff;
+    //     }
+    // }
+    // .header {
+    //     background-color: yellow;
+    // }
+    // .footer {
+    //     background-color: yellow;
+    // }
 }
 
 .theme-switcher-wrap {
@@ -64,21 +65,4 @@ $color-theme-dark:#fff;
             }
         }
     }
-}
-
-.footer {
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    height: 7%;
-    /* Height of the footer */
-    background: #6cf;
-}
-
-.header {
-    bottom: 0;
-    width: 100%;
-    height: 8%;
-    /* Height of the footer */
-    background: #6cf;
 }

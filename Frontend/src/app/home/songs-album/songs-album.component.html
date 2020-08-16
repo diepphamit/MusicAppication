@@ -1,0 +1,33 @@
+<div class="navv">
+    <app-header></app-header>
+</div>
+<div>
+
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-8" class="overall">
+            <div class="row">
+                <div class="col-md-4">
+
+                    <img src="{{picture}}" style="text-align: center;border-radius: 50%;margin: 3% ;" />
+                    <h1 style="text-align: center;">{{title}}</h1>
+                </div>
+                <div class="col-md-8">
+                    <div style="width: 500px;margin-top: 5%;">
+
+                        <mat-advanced-audio-player [playlist]="playlist" [displayTitle]="msaapDisplayTitle" [autoPlay]="false" muted="muted" [displayPlaylist]="playlist" [pageSizeOptions]="msaapPageSizeOptions" [displayVolumeControls]="msaapDisplayVolumeControls" [expanded]="true"></mat-advanced-audio-player>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2">
+
+        </div>
+    </div>
+    <!-- <div *ngFor="let item of playlist">
+        {{item.link}}
+    </div> -->
+</div>
+<div class="footer">
+    <app-footer></app-footer>
+</div>

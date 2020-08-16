@@ -80,19 +80,22 @@ ngb-carousel {
     z-index: 20;
 }
 
-.album {
-    /* border-bottom: 3px solid green; */
-}
-
 .listalbum {
     margin-top: 14px;
     padding-bottom: 5px;
-    border-bottom: 1px solid brown;
+    border-bottom: 1px solid green;
+}
+
+.listalbumm {
+    margin-top: 14px;
+    padding-bottom: 5px;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
 }
 
 .music {
     width: 80%;
     margin: auto;
+    margin-top: 3%;
     /* border: 1px solid green; */
 }
 
@@ -100,10 +103,14 @@ ngb-carousel {
     box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
 }
 
+.forAlbum tr {
+    border: 2px solid green;
+}
+
 .header {
     border-bottom: 3px solid green;
     margin-bottom: 15px;
-    font-size: 30px;
+    font-size: 35px;
     font-family: 'Courier New', Courier, monospace;
 }
 
@@ -111,6 +118,7 @@ ngb-carousel {
 /* Parent Container */
 
 .content_img {
+    margin-top: 8%;
     position: relative;
     float: bottom;
 }
@@ -125,7 +133,7 @@ ngb-carousel {
     background: black;
     color: white;
     font-family: sans-serif;
-    opacity: 0;
+    opacity: 10;
     visibility: hidden;
     -webkit-transition: visibility 0s, opacity 0.5s linear;
     transition: visibility 0s, opacity 0.5s linear;
@@ -135,16 +143,15 @@ ngb-carousel {
 
 /* Hover on Parent Container */
 
-.content_img:hover {
-    cursor: pointer;
-}
-
-.content_img:hover div {
+// .content_img:hover {
+//     cursor: pointer;
+// }
+.content_img div {
     width: 100%;
     height: 30%;
     padding: 8px 15px;
     visibility: visible;
-    opacity: 10;
+    opacity: 100;
 }
 
 .showmore {
@@ -169,4 +176,43 @@ ngb-carousel {
     height: 8%;
     /* Height of the footer */
     background: #6cf;
+}
+
+.heart {
+    display: inline-block;
+    color: red;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    text-decoration: none;
+    overflow: hidden;
+    // transition: 0.2s;
+}
+
+.heart:hover {
+    border-radius: 50%;
+    height: 70%;
+    color: #255784;
+    background: #2196f3;
+    box-shadow: 0 0 10px #2196f3, 0 0 40px #2196f3, 0 0 80px #2196f3;
+    transition-delay: 0.1s;
+}
+
+#first-child {
+    height: 200px;
+    width: 200px;
+    background: white;
+    border-radius: 0%;
+    margin-top: 150px;
+    margin-bottom: 0px;
+    margin-left: 500px;
+    margin-right: 0px;
+    -webkit-animation: myfirst 1s;
+    animation: myfirst 1s;
+}
+
+#second-parent {
+    margin-top: 0px;
+    margin-bottom: 0px;
+    margin-left: 415px;
+    margin-right: 0px;
 }

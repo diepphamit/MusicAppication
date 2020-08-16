@@ -38,5 +38,29 @@ export class SongService {
 
     return this.apollo.mutate({ mutation: addFavoriteSongMutation });
   }
+
+  getFavoriteSongByUserId(userId,pageSize, pageNumber): Observable<any>{
+    const fsongs=gql`query{
+      favoriteSongsByUser(userId:"${userId}",take:${pageSize},skip:${pageNumber}){
+        total,
+        songs{
+          id,
+          link,
+          title_short,
+          preview,
+          rank,
+          album {
+            id,
+            title,
+            cover_medium
+          }
+        }
+        
+      }
+    }`;
+    return this.apollo.watchQuery({ query: fsongs }).valueChanges;
+  }
+  
+ 
 }
 

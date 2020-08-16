@@ -1,7 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { DomSanitizer } from '@angular/platform-browser';
+import { Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 
 import { NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
+import { NgbPopoverConfig } from '@ng-bootstrap/ng-bootstrap';
 
 import { Apollo } from 'apollo-angular';
 
@@ -14,20 +18,27 @@ import { SongService } from '../services/song.service';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css'],
-  providers: [NgbCarouselConfig]  // add NgbCarouselConfig to the component providers
-})
+  styleUrls: ['./home.component.scss'],
+  providers: [NgbCarouselConfig, NgbPopoverConfig]  // add NgbCarouselConfig to the component providers
+}
+)
 export class HomeComponent implements OnInit {
+  //@ViewChild('audio', { static: true }) audioElms: ElementRef;
+
+  currentpage = 1;
   itemsAsync: Observable<any[]>;
   albumAsync: Observable<any[]>;
-  total: any;
+  total = 0;
   totalalbum;
+  totalfs;
   showFirst;
-  user=null;
+  user = null;
+  islogin = false;
+  fsongsAsync: Observable<any[]>;
+  firstName: string;
 
-
-
-  constructor(config: NgbCarouselConfig, private songService: SongService, private apollo: Apollo, private albumService: AlbumService, public dialog: MatDialog) {
+  constructor(config: NgbPopoverConfig, private songService: SongService, private apollo: Apollo, private albumService: AlbumService, public dialog: MatDialog, private sanitize: DomSanitizer, private routeParam: ActivatedRoute, private router: Router) {
+    config.placement = 'top';
 
   }
   public activeElement = 0;
@@ -35,16 +46,20 @@ export class HomeComponent implements OnInit {
     this.activeElement = id;
   }
 
+
   ngOnInit(): void {
+    this.user = JSON.parse(localStorage.getItem('currentUser'));
+
     this.getListSongs();
     this.getAllAlbums();
+    if (this.user !== null) {
+      this.islogin = true;
+    }
+    // this.addFavoriteSong();
 
-    this.addFavoriteSong('5f16863a0a67093742b0bf7d', 854914402);
-    this.user = JSON.parse(localStorage.getItem('currentUser'));
-    console.log("iuoioioio" + this.user);
-    
   }
- 
+
+
   openDialog() {
     const dialogRef = this.dialog.open(DialogComponent);
 
@@ -58,14 +73,6 @@ export class HomeComponent implements OnInit {
         tap(respone => this.total = respone.data.songs.total),
         map(({ data }) => data.songs.songs)
       );
-
-    this.itemsAsync.subscribe(data => {
-      console.log(data); console.log(this.total);
-
-    });
-
-
-
   }
 
   getAllAlbums() {
@@ -74,14 +81,6 @@ export class HomeComponent implements OnInit {
         tap(respone => this.total = respone.data.albums.total),
         map(({ data }) => data.albums.albums)
       );
-
-    this.albumAsync.subscribe(data => {
-
-      console.log(data);
-      console.log(this.total);
-    });
-
-
   }
   getListSongsPagination(number) {
     this.itemsAsync = this.songService.getAllSongs(6, number)
@@ -90,20 +89,35 @@ export class HomeComponent implements OnInit {
         map(({ data }) => data.songs.songs)
       );
 
-    this.itemsAsync.subscribe(data => {
-      console.log(data);
-
-    });
-
 
   }
+  // getFavoriteSongs(userId) {
+  //   this.fsongsAsync = this.songService.getFavoriteSongByUserId(userId, 20, 0)
+  //     .pipe(
+  //       tap(reponse => this.totalfs = reponse.data.favoriteSongsByUser.total),
+  //       map(({ data }) => data.favoriteSongsByUser.songs)
+  //     );
+  // }
   getarrayPageNumber(count) {
     return new Array(Math.ceil(count / 6));
   }
-
-  addFavoriteSong(userId, songId) {
-    this.songService.addFavoriteSongByUserId(userId, songId).subscribe(data => console.log('Add favorite song successfully'));
+  addFavoriteSong(songId) {
+    this.user = JSON.parse(localStorage.getItem('currentUser'));
+    this.songService.addFavoriteSongByUserId(this.user._id, songId).subscribe(data => {
+      console.log('Add favorite song successfully');
+      this.router.navigate(['favoriteSong'], { queryParams: { added: 'true' } });
+      //this.getFavoriteSongs('5f2905d08f14d320e83bd9f9');
+      // this.fsongsAsync = this.songService.getFavoriteSongByUserId(userId, 20, 0)
+      //   .pipe(
+      //     tap(reponse => this.totalfs = reponse.data.favoriteSongsByUser.total),
+      //     map(({ data }) => data.favoriteSongsByUser.songs)
+      //   );
+    });
   }
+
+
+
+
 
 }
 

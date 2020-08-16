@@ -1,105 +1,65 @@
 <div class="navv">
     <app-header></app-header>
 </div>
-<div>
-    <button (click)="showFirst=!showFirst"></button>
-    <div *ngIf="!showFirst">
-        <ngb-carousel [showNavigationArrows]="true" [showNavigationIndicators]="true" interval="12000" [keyboard]="true" [pauseOnHover]="true" [wrap]="true" [activeId]="'secondSlide'">
-            <ng-template ngbSlide>
-                <div class="picsum-img-wrapper">
-                    <img src="assets/a.jpeg" alt="Angular Carousel 1" style="width: 1110px;height: 400px;">
-                </div>
-                <div class="carousel-caption">
-                    <h3>Title Goes Here</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                    <p *ngFor="let item of itemsAsync | async"> {{item.id}}</p>
-                </div>
-            </ng-template>
-            <ng-template ngbSlide>
-                <div class="picsum-img-wrapper">
-                    <img src="assets/b.jpeg" alt="Angular Carousel 2" style="width: 1110px;height: 400px;">
-                </div>
-                <div class="carousel-caption">
-                    <h3>Title Goes Here</h3>
-                    <p>Consectetur tortor volutpat pretium.</p>
-                </div>
-            </ng-template>
-        </ngb-carousel>
-    </div>
-    <div *ngIf="showFirst" style="border:1px solid red; height:400px">
-        <i class="glyphicon glyphicon-record" style="float: right;">ghj</i>
-        <img class="image" src="http://i.stack.imgur.com/pC1Tv.jpg" alt="" width="400px" height="400px">
-    </div>
-</div>
+<!-- -->
 <div class="music">
 
     <div class="row">
         <div class="col-md-8">
             <strong class="header">List </strong>
-            <div class="row" style="margin-top:7px">
+            <div class="row">
 
                 <div class="col-md-4" *ngFor="let item of itemsAsync | async">
 
                     <div class="onerow content_img">
 
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/1200px-Image_created_with_a_mobile_phone.png" alt="" height="60%" width="100%" style="border-radius:2%;">
+                        <img src="assets/music.jpg" alt="" height="110%" width="100%" style="border-radius:2%;">
 
                         <div>
-                            <span class="material-icons">
+                            <a class="heart">
+                                <span class="material-icons" (click)="addFavoriteSong(item.id)">
                                 favorite_border
-                            </span>
+                                </span>
+                            </a>
                             <span>
-                                <audio controls style="width: 85%;height: 50%;">
-                                    <source src="{{item.preview}}" type="audio/mpeg">
+                               <audio controls style="width: 85%;height: 50%;" (ended)="audioEnded()" preload="auto" #audioPlayer>    
+                                    <source [src]="item.preview" type="audio/mpeg" >
                                 </audio>
                             </span>
 
+
                         </div>
+
                     </div>
-                    <label for="">  {{item.title_short}}</label>
+                    <label for="" style="font-size: 20px;margin-top: 4%;">  {{item.title_short}}</label>
                 </div>
             </div>
 
-            <nav aria-label="Page navigation example" style="margin-left: 40%;">
+            <nav aria-label="Page navigation example" style="margin-left: 40%;margin-top: 3%;">
+
                 <ul class="pagination">
-                    <li class="page-item">
-                        <a class="page-link" href="#" aria-label="Previous">
-                            <span aria-hidden="true">&laquo;</span>
-                            <span class="sr-only">Previous</span>
-                        </a>
-                    </li>
 
                     <li *ngFor="let item of getarrayPageNumber(total);let in=index" [ngClass]="in === activeElement ? 'active' : 'none'" (click)="selectedItem(in)">
                         <a class=" page-link " (click)="getListSongsPagination(in) ">{{in+1}}</a>
                     </li>
 
-                    <li class="page-item ">
-                        <a class="page-link " href="# " aria-label="Next ">
-                            <span aria-hidden="true ">&raquo;</span>
-                            <span class="sr-only ">Next</span>
-                        </a>
-                    </li>
                 </ul>
-
             </nav>
 
+
         </div>
-        <!-- gj============ -->
         <div class="col-md-4 ">
             <strong class=" header ">Album</strong>
-            <table class="table table-hover ">
+            <table class="table table-hover forAlbum ">
 
                 <tbody>
                     <tr class="row listalbum" *ngFor="let album of albumAsync  | async">
-                        <div class="col-md-3 "><img src="{{album.cover_medium}} " alt=" " height="33% " width="110% " style="border-radius:50%; "></div>
-                        <div class="col-md-9 ">
-
-                            <div style="margin-left: 10%;margin-top: 10%; ">
+                        <a [routerLink]="['/songsAlbum',album.albumId,album.title,album.cover_medium]" routerLinkActive="router-link-active">
+                            <span class="col-md-6 "><img src="{{album.cover_medium}} " alt=" " height="32% " width="20% " style="border-radius:50%; "></span>
+                            <span class="col-md-6 ">
                                 <strong>{{album.title}}</strong><br>
-
-                            </div>
-
-                        </div>
+                            </span>
+                        </a>
 
                     </tr>
 
@@ -110,31 +70,13 @@
 
     </div>
 </div>
+<!-- <ng-template #popContent>Hello, <b>Popover</b>! content</ng-template>
+<ng-template #popTitle><i>You must login</i></ng-template>
 
-<div class="music ">
+<button type="button" class="btn btn-outline-secondary" [ngbPopover]="popContent" [popoverTitle]="popTitle">
+  Popover with HTML!
+</button> -->
 
-    <div class="row ">
-
-        <h2>List trash</h2>
-        <table class="table table-hover ">
-
-            <tbody>
-                <tr class="rowoftable ">
-                    <td><span>1</span><span><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/1200px-Image_created_with_a_mobile_phone.png " alt=" " height="10% " width="10% " style="border-radius:2%; "></span>
-                        <span>Con chó con</span>
-                        <span>Tác giả</span>
-                        <span>Thời lượng</span>
-                        <span class="material-icons " style="color: red; ">
-                            favorite
-                            </span>
-                    </td>
-                </tr>
-
-            </tbody>
-        </table>
-
-    </div>
-</div>
 <div class="footer">
     <app-footer></app-footer>
 </div>
