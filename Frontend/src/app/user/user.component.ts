@@ -11,5 +11,7 @@ export class UserComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
+  clickLogin(){
+    alert("login");
+  }
 }
