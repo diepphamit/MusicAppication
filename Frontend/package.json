@@ -36,6 +36,7 @@
     "graphql-tag": "^2.10.4",
     "gulp": "^4.0.2",
     "jquery": "^3.5.1",
+    "ng2-search-filter": "^0.5.1",
     "ngx-audio-player": "^9.1.1",
     "ngx-pagination": "^5.0.0",
     "rxjs": "~6.5.5",

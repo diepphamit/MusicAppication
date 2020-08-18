@@ -70,6 +70,12 @@
                                 favorite_border
                                 </span>
                             </a>
+                            <!-- <ng-template #show>
+                                <span class="material-icons">
+                                    favorite
+                                 </span>
+                            </ng-template> -->
+
                             <span>
                                <audio controls style="width: 85%;height: 50%;" #audio (play)="onPaly(audio,item.id)" (pause)="onEnd(audio,item.id)">    
                                     <source [src]="item.preview" type="audio/mpeg" >
@@ -97,18 +103,23 @@
         </div>
         <div class="col-md-4 ">
             <strong class=" header ">Album</strong>
+            <input type="text" name="search" [(ngModel)]="searchText" autocomplete="off" placeholder="Search" style="margin-left: 10%;width: 60%;">
+
             <table class="table table-hover forAlbum ">
 
                 <tbody>
-                    <tr class="row listalbum" *ngFor="let album of albumAsync  | async">
-                        <a [routerLink]="['/songsAlbum',album.albumId,album.title,album.cover_medium]" routerLinkActive="router-link-active">
-                            <span class="col-md-6 "><img src="{{album.cover_medium}} " alt=" " height="32% " width="20% " style="border-radius:50%; "></span>
-                            <span class="col-md-6 ">
-                                <strong>{{album.title}}</strong><br>
-                            </span>
-                        </a>
+                    <div *ngFor="let album of albumAsync| async | filter:searchText; let i=index">
+                        <tr class="row listalbum" *ngIf="i<4">
 
-                    </tr>
+                            <a [routerLink]="['/songsAlbum',album.albumId,album.title,album.cover_medium]" routerLinkActive="router-link-active">
+                                <span class="col-md-6 "><img src="{{album.cover_medium}} " alt=" " height="32% " width="20% " style="border-radius:50%; "></span>
+                                <span class="col-md-6 ">
+                                <strong>{{album.title}}{{i}}</strong><br>
+                            </span>
+                            </a>
+
+                        </tr>
+                    </div>
 
                 </tbody>
             </table>
