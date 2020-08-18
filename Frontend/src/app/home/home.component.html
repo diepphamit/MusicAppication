@@ -6,7 +6,56 @@
 
     <div class="row">
         <div class="col-md-8">
-            <strong class="header">List </strong>
+            <strong class="header">List
+             </strong>
+
+            <span *ngIf="notification" class="text-success">
+                        <i class="fas fa-check-circle"></i>
+                        {{notification.message}}
+                   
+            <div class="{{notification.note}}" id="firework1">
+                <div class="exploision"></div>
+                <div class="exploision"></div>
+                <div class="exploision"></div>
+                <div class="exploision"></div>
+                <div class="exploision"></div>
+                <div class="exploision"></div>
+                <div class="exploision"></div>
+                <div class="exploision"></div>
+                <div class="exploision"></div>
+                <div class="exploision"></div>
+                <div class="exploision"></div>
+                <div class="exploision"></div>
+            </div>
+            <div class="{{notification.note}}" id="firework2">
+                <div class="exploision"></div>
+                <div class="exploision"></div>
+                <div class="exploision"></div>
+                <div class="exploision"></div>
+                <div class="exploision"></div>
+                <div class="exploision"></div>
+                <div class="exploision"></div>
+                <div class="exploision"></div>
+                <div class="exploision"></div>
+                <div class="exploision"></div>
+                <div class="exploision"></div>
+                <div class="exploision"></div>
+            </div>
+            <div class="{{notification.note}}" id="firework3">
+                <div class="exploision"></div>
+                <div class="exploision"></div>
+                <div class="exploision"></div>
+                <div class="exploision"></div>
+                <div class="exploision"></div>
+                <div class="exploision"></div>
+                <div class="exploision"></div>
+                <div class="exploision"></div>
+                <div class="exploision"></div>
+                <div class="exploision"></div>
+                <div class="exploision"></div>
+                <div class="exploision"></div>
+            </div>
+        </span>
             <div class="row">
 
                 <div class="col-md-4" *ngFor="let item of itemsAsync | async">
@@ -22,16 +71,14 @@
                                 </span>
                             </a>
                             <span>
-                               <audio controls style="width: 85%;height: 50%;" (ended)="audioEnded()" preload="auto" #audioPlayer>    
+                               <audio controls style="width: 85%;height: 50%;" #audio (play)="onPaly(audio,item.id)" (pause)="onEnd(audio,item.id)">    
                                     <source [src]="item.preview" type="audio/mpeg" >
                                 </audio>
                             </span>
-
-
                         </div>
 
                     </div>
-                    <label for="" style="font-size: 20px;margin-top: 4%;">  {{item.title_short}}</label>
+                    <label for="" style="font-size: 20px;margin-top: 4%;" [ngClass]="play === item.id ? 'playing' : 'hello'">  {{item.title_short}} </label>
                 </div>
             </div>
 

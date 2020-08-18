@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChildren } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Router } from '@angular/router';
@@ -24,7 +24,7 @@ import { SongService } from '../services/song.service';
 )
 export class HomeComponent implements OnInit {
   //@ViewChild('audio', { static: true }) audioElms: ElementRef;
-
+  //@ViewChildren('audio') audioElms :ElementRef[];
   currentpage = 1;
   itemsAsync: Observable<any[]>;
   albumAsync: Observable<any[]>;
@@ -36,6 +36,7 @@ export class HomeComponent implements OnInit {
   islogin = false;
   fsongsAsync: Observable<any[]>;
   firstName: string;
+  notification = null;
 
   constructor(config: NgbPopoverConfig, private songService: SongService, private apollo: Apollo, private albumService: AlbumService, public dialog: MatDialog, private sanitize: DomSanitizer, private routeParam: ActivatedRoute, private router: Router) {
     config.placement = 'top';
@@ -105,17 +106,34 @@ export class HomeComponent implements OnInit {
     this.user = JSON.parse(localStorage.getItem('currentUser'));
     this.songService.addFavoriteSongByUserId(this.user._id, songId).subscribe(data => {
       console.log('Add favorite song successfully');
-      this.router.navigate(['favoriteSong'], { queryParams: { added: 'true' } });
-      //this.getFavoriteSongs('5f2905d08f14d320e83bd9f9');
-      // this.fsongsAsync = this.songService.getFavoriteSongByUserId(userId, 20, 0)
-      //   .pipe(
-      //     tap(reponse => this.totalfs = reponse.data.favoriteSongsByUser.total),
-      //     map(({ data }) => data.favoriteSongsByUser.songs)
-      //   );
+      //this.router.navigate(['favoriteSong'], { queryParams: { added: 'true' } });
+      this.showNotification();
     });
   }
 
+  private currentPlayedElem: HTMLAudioElement = null;
+  play = 0;
 
+  onPaly(elm: HTMLAudioElement, id) {
+
+    if (this.currentPlayedElem && this.currentPlayedElem !== elm) {
+      this.currentPlayedElem.pause();
+
+    }
+    this.currentPlayedElem = elm;
+    
+    this.play=id; 
+  }
+ 
+  onEnd(elm: HTMLAudioElement, id) {
+    this.play=0;
+  }
+  showNotification() {
+    this.notification = { class: 'exploision', message: 'Added successfully',note:'firework' }
+    setTimeout(() => {
+      this.notification = null;
+    }, 2000);
+  }
 
 
 

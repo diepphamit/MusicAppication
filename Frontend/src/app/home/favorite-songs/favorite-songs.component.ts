@@ -64,4 +64,21 @@ export class FavoriteSongsComponent implements OnInit {
   getarrayPageNumber(count) {
     return new Array(Math.ceil(count / 4));
   }
+  private currentPlayedElem: HTMLAudioElement = null;
+  play = 0;
+
+  onPaly(elm: HTMLAudioElement, id) {
+
+    if (this.currentPlayedElem && this.currentPlayedElem !== elm) {
+      this.currentPlayedElem.pause();
+
+    }
+    this.currentPlayedElem = elm;
+    
+    this.play=id; 
+  }
+ 
+  onEnd(elm: HTMLAudioElement, id) {
+    this.play=0;
+  }
 }
