@@ -6,39 +6,86 @@
 
     <div class="row">
         <div class="col-md-8">
-            <strong class="header">List </strong>
+            <strong class="header">List
+             </strong>
+            <input type="text" name="search" [(ngModel)]="searchSong" autocomplete="off" placeholder="Search song" style="margin-left: 5%;width: 60%;"><br>
+            <span *ngIf="notification" class="text-success">
+                        <i class="fas fa-check-circle"></i>
+                        {{notification.message}}
+                   
+            <div class="{{notification.note}}" id="firework1">
+                <div class="exploision"></div>
+                <div class="exploision"></div>
+                <div class="exploision"></div>
+                <div class="exploision"></div>
+                <div class="exploision"></div>
+                <div class="exploision"></div>
+                <div class="exploision"></div>
+                <div class="exploision"></div>
+                <div class="exploision"></div>
+                <div class="exploision"></div>
+                <div class="exploision"></div>
+                <div class="exploision"></div>
+            </div>
+            <div class="{{notification.note}}" id="firework2">
+                <div class="exploision"></div>
+                <div class="exploision"></div>
+                <div class="exploision"></div>
+                <div class="exploision"></div>
+                <div class="exploision"></div>
+                <div class="exploision"></div>
+                <div class="exploision"></div>
+                <div class="exploision"></div>
+                <div class="exploision"></div>
+                <div class="exploision"></div>
+                <div class="exploision"></div>
+                <div class="exploision"></div>
+            </div>
+            <div class="{{notification.note}}" id="firework3">
+                <div class="exploision"></div>
+                <div class="exploision"></div>
+                <div class="exploision"></div>
+                <div class="exploision"></div>
+                <div class="exploision"></div>
+                <div class="exploision"></div>
+                <div class="exploision"></div>
+                <div class="exploision"></div>
+                <div class="exploision"></div>
+                <div class="exploision"></div>
+                <div class="exploision"></div>
+                <div class="exploision"></div>
+            </div>
+        </span>
             <div class="row">
 
-                <div class="col-md-4" *ngFor="let item of itemsAsync | async">
+                <div class="col-md-4" *ngFor="let item of itemsAsync | async| filter:searchSong;let j=index;">
+                    <div *ngIf="j<6">
+                        <div class="onerow content_img">
 
-                    <div class="onerow content_img">
+                            <img src="assets/music.jpg" alt="" height="110%" width="100%" style="border-radius:2%;">
 
-                        <img src="assets/music.jpg" alt="" height="110%" width="100%" style="border-radius:2%;">
-
-                        <div>
-                            <a class="heart">
-                                <span class="material-icons" (click)="addFavoriteSong(item.id)">
-                                favorite_border
+                            <div>
+                                <a class="heart">
+                                    <span class="material-icons" [class.hightlighted]="temp[e*6+j]===item.id" (click)="addFavoriteSong(item.id,e*6+j)">
+                                favorite
                                 </span>
-                            </a>
-                            <span>
-                               <audio controls style="width: 85%;height: 50%;" (ended)="audioEnded()" preload="auto" #audioPlayer>    
+                                </a>
+                                <span>
+                               <audio controls style="width: 85%;height: 50%;" #audio (play)="onPaly(audio,item.id)" (pause)="onEnd(audio,item.id)">    
                                     <source [src]="item.preview" type="audio/mpeg" >
                                 </audio>
                             </span>
-
+                            </div>
 
                         </div>
-
+                        <label for="" style="font-size: 20px;margin-top: 4%;" [ngClass]="play === item.id ? 'playing' : 'hello'">  {{item.title_short}} </label>
                     </div>
-                    <label for="" style="font-size: 20px;margin-top: 4%;">  {{item.title_short}}</label>
                 </div>
             </div>
 
             <nav aria-label="Page navigation example" style="margin-left: 40%;margin-top: 3%;">
 
                 <ul class="pagination">
-
                     <li *ngFor="let item of getarrayPageNumber(total);let in=index" [ngClass]="in === activeElement ? 'active' : 'none'" (click)="selectedItem(in)">
                         <a class=" page-link " (click)="getListSongsPagination(in) ">{{in+1}}</a>
                     </li>
@@ -46,22 +93,27 @@
                 </ul>
             </nav>
 
-
         </div>
+
         <div class="col-md-4 ">
             <strong class=" header ">Album</strong>
+            <input type="text" name="search" [(ngModel)]="searchText" autocomplete="off" placeholder="Search album" style="margin-left: 10%;width: 60%;">
+
             <table class="table table-hover forAlbum ">
 
                 <tbody>
-                    <tr class="row listalbum" *ngFor="let album of albumAsync  | async">
-                        <a [routerLink]="['/songsAlbum',album.albumId,album.title,album.cover_medium]" routerLinkActive="router-link-active">
-                            <span class="col-md-6 "><img src="{{album.cover_medium}} " alt=" " height="32% " width="20% " style="border-radius:50%; "></span>
-                            <span class="col-md-6 ">
+                    <div *ngFor="let album of albumAsync| async | filter:searchText; let i=index">
+                        <tr class="row listalbum" *ngIf="i<4">
+
+                            <a [routerLink]="['/songsAlbum',album.albumId,album.title,album.cover_medium]" routerLinkActive="router-link-active">
+                                <span class="col-md-6 "><img src="{{album.cover_medium}} " alt=" " height="32% " width="20% " style="border-radius:50%; "></span>
+                                <span class="col-md-6 ">
                                 <strong>{{album.title}}</strong><br>
                             </span>
-                        </a>
+                            </a>
 
-                    </tr>
+                        </tr>
+                    </div>
 
                 </tbody>
             </table>

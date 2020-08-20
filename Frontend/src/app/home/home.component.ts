@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, ViewChildren } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Router } from '@angular/router';
@@ -24,9 +24,11 @@ import { SongService } from '../services/song.service';
 )
 export class HomeComponent implements OnInit {
   //@ViewChild('audio', { static: true }) audioElms: ElementRef;
-
+  //@ViewChildren('audio') audioElms :ElementRef[];
+  @Input() isActive: boolean;
   currentpage = 1;
   itemsAsync: Observable<any[]>;
+  allsongAsync: Observable<any[]>;
   albumAsync: Observable<any[]>;
   total = 0;
   totalalbum;
@@ -36,7 +38,12 @@ export class HomeComponent implements OnInit {
   islogin = false;
   fsongsAsync: Observable<any[]>;
   firstName: string;
-
+  notification = null;
+  idisFavorite = 0;
+ e=0;
+  searchText;
+  searchSong;
+  config:any;
   constructor(config: NgbPopoverConfig, private songService: SongService, private apollo: Apollo, private albumService: AlbumService, public dialog: MatDialog, private sanitize: DomSanitizer, private routeParam: ActivatedRoute, private router: Router) {
     config.placement = 'top';
 
@@ -54,12 +61,35 @@ export class HomeComponent implements OnInit {
     this.getAllAlbums();
     if (this.user !== null) {
       this.islogin = true;
+      this.getFavoriteSongs();
+      this.getMatch();
+
     }
-    // this.addFavoriteSong();
 
+
+    
+
+    
   }
+  getMatch() {
+    this.allsongAsync = this.songService.getAllSongs(100, 0)
+      .pipe(
+        tap(respone => this.total = respone.data.songs.total),
+        map(({ data }) => data.songs.songs)
+      );
+    this.allsongAsync.subscribe(data => {
+      this.fsongsAsync.subscribe(song => {
+        for (var i = 0; i < data.length; i++) {
+          for (var e = 0; e < song.length; e++) {
+            if (data[i].id === song[e].id)
+              this.temp[i] = data[i].id;
+          }
+        }
+       
+      })
 
-
+    });
+  }
   openDialog() {
     const dialogRef = this.dialog.open(DialogComponent);
 
@@ -68,15 +98,16 @@ export class HomeComponent implements OnInit {
     });
   }
   getListSongs() {
-    this.itemsAsync = this.songService.getAllSongs(6, 0)
+    this.itemsAsync = this.songService.getAllSongs(100, 0)
       .pipe(
         tap(respone => this.total = respone.data.songs.total),
         map(({ data }) => data.songs.songs)
       );
+
   }
 
   getAllAlbums() {
-    this.albumAsync = this.albumService.getAllAlbums(4, 0)
+    this.albumAsync = this.albumService.getAllAlbums(100, 0)
       .pipe(
         tap(respone => this.total = respone.data.albums.total),
         map(({ data }) => data.albums.albums)
@@ -88,36 +119,63 @@ export class HomeComponent implements OnInit {
         tap(respone => this.total = respone.data.songs.total),
         map(({ data }) => data.songs.songs)
       );
-
-
+      this.e=number;
   }
-  // getFavoriteSongs(userId) {
-  //   this.fsongsAsync = this.songService.getFavoriteSongByUserId(userId, 20, 0)
-  //     .pipe(
-  //       tap(reponse => this.totalfs = reponse.data.favoriteSongsByUser.total),
-  //       map(({ data }) => data.favoriteSongsByUser.songs)
-  //     );
-  // }
+  getFavoriteSongs() {
+    if( this.user._id !=null){
+    this.fsongsAsync = this.songService.getFavoriteSongByUserId(this.user._id, 20, 0)
+      .pipe(
+        tap(reponse => this.totalfs = reponse.data.favoriteSongsByUser.total),
+        map(({ data }) => data.favoriteSongsByUser.songs)
+      );
+    this.fsongsAsync.subscribe(data => {
+      console.log("favoritesong");
+      console.log(data);
+    });
+  }
+  }
+ 
   getarrayPageNumber(count) {
     return new Array(Math.ceil(count / 6));
   }
-  addFavoriteSong(songId) {
+  temp: number[] = [];
+  addFavoriteSong(songId, j) {
     this.user = JSON.parse(localStorage.getItem('currentUser'));
     this.songService.addFavoriteSongByUserId(this.user._id, songId).subscribe(data => {
       console.log('Add favorite song successfully');
-      this.router.navigate(['favoriteSong'], { queryParams: { added: 'true' } });
-      //this.getFavoriteSongs('5f2905d08f14d320e83bd9f9');
-      // this.fsongsAsync = this.songService.getFavoriteSongByUserId(userId, 20, 0)
-      //   .pipe(
-      //     tap(reponse => this.totalfs = reponse.data.favoriteSongsByUser.total),
-      //     map(({ data }) => data.favoriteSongsByUser.songs)
-      //   );
+      //this.router.navigate(['favoriteSong'], { queryParams: { added: 'true' } });
+      this.getFavoriteSongs();
+      this.showNotification();
+      this.isActive = songId;
+      this.temp[j] = songId;
+
     });
   }
 
+  private currentPlayedElem: HTMLAudioElement = null;
+  play = 0;
 
+  onPaly(elm: HTMLAudioElement, id) {
 
+    if (this.currentPlayedElem && this.currentPlayedElem !== elm) {
+      this.currentPlayedElem.pause();
 
+    }
+    this.currentPlayedElem = elm;
+
+    this.play = id;
+  }
+
+  onEnd(elm: HTMLAudioElement, id) {
+    this.play = 0;
+  }
+  showNotification() {
+    this.notification = { class: 'exploision', message: 'Added successfully', note: 'firework' }
+    setTimeout(() => {
+      this.notification = null;
+    }, 2000);
+  }
+  
 
 }
 

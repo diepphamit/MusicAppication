@@ -13,6 +13,8 @@ import { NgxAudioPlayerModule } from 'ngx-audio-player';
 
 import { NgxPaginationModule } from 'ngx-pagination';
 
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { GraphQLModule } from './graphql.module';
@@ -57,9 +59,8 @@ import { SignUpComponent } from './user/sign-up/sign-up.component';
     ReactiveFormsModule,
     CommonModule,
     NgxAudioPlayerModule,
-    NgxPaginationModule
-
-    
+    NgxPaginationModule,
+    Ng2SearchPipeModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [

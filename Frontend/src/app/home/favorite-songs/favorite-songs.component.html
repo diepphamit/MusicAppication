@@ -20,7 +20,7 @@
                     <td><span style="color: blue;">{{index+1}}</span>
                         <span style="margin-left:5%;font-size: larger;color: blue;">{{fs.title_short}}</span>
                         <span style="margin-left:5%;">
-                            <audio controls style="width: 120%;height: 100%;padding-bottom: 4%;margin-top: 1%;" >
+                            <audio controls style="width: 120%;height: 100%;padding-bottom: 4%;margin-top: 1%;" #audio (play)="onPaly(audio,fs.id)" (pause)="onEnd(audio,fs.id)">
                                 <source src="{{fs.preview}}" type="audio/mpeg">
                             </audio>
                         </span>
