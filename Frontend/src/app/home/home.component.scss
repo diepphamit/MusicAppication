@@ -213,7 +213,8 @@ ngb-carousel {
 
 .text-success {
     color: rgb(47, 255, 116);
-    font-size: 30px;
+    font-size: 20px;
+    margin-left: 30%;
 }
 
 .firework {
@@ -329,4 +330,13 @@ ngb-carousel {
 
 #firework3 .exploision::before {
     animation: exploision 2s .4s ease-in-out infinite;
+}
+
+.material-icons {
+    color: rgb(172, 172, 192);
+    cursor: pointer;
+}
+
+.hightlighted {
+    color: red;
 }

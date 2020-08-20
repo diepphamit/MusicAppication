@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChildren } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, ViewChildren } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Router } from '@angular/router';
@@ -25,8 +25,10 @@ import { SongService } from '../services/song.service';
 export class HomeComponent implements OnInit {
   //@ViewChild('audio', { static: true }) audioElms: ElementRef;
   //@ViewChildren('audio') audioElms :ElementRef[];
+  @Input() isActive: boolean;
   currentpage = 1;
   itemsAsync: Observable<any[]>;
+  allsongAsync: Observable<any[]>;
   albumAsync: Observable<any[]>;
   total = 0;
   totalalbum;
@@ -35,14 +37,16 @@ export class HomeComponent implements OnInit {
   user = null;
   islogin = false;
   fsongsAsync: Observable<any[]>;
-  allsongs:Observable<any[]>;
   firstName: string;
   notification = null;
-  idisFavorite=0;
+  idisFavorite = 0;
+ e=0;
   searchText;
-
+  searchSong;
+  config:any;
   constructor(config: NgbPopoverConfig, private songService: SongService, private apollo: Apollo, private albumService: AlbumService, public dialog: MatDialog, private sanitize: DomSanitizer, private routeParam: ActivatedRoute, private router: Router) {
     config.placement = 'top';
+
   }
   public activeElement = 0;
   public selectedItem(id) {
@@ -57,14 +61,35 @@ export class HomeComponent implements OnInit {
     this.getAllAlbums();
     if (this.user !== null) {
       this.islogin = true;
+      this.getFavoriteSongs();
+      this.getMatch();
+
     }
 
-    // this.addFavoriteSong();
-    this.getFavoriteSongs();
 
+    
+
+    
   }
+  getMatch() {
+    this.allsongAsync = this.songService.getAllSongs(100, 0)
+      .pipe(
+        tap(respone => this.total = respone.data.songs.total),
+        map(({ data }) => data.songs.songs)
+      );
+    this.allsongAsync.subscribe(data => {
+      this.fsongsAsync.subscribe(song => {
+        for (var i = 0; i < data.length; i++) {
+          for (var e = 0; e < song.length; e++) {
+            if (data[i].id === song[e].id)
+              this.temp[i] = data[i].id;
+          }
+        }
+       
+      })
 
-
+    });
+  }
   openDialog() {
     const dialogRef = this.dialog.open(DialogComponent);
 
@@ -73,7 +98,7 @@ export class HomeComponent implements OnInit {
     });
   }
   getListSongs() {
-    this.itemsAsync = this.songService.getAllSongs(6, 0)
+    this.itemsAsync = this.songService.getAllSongs(100, 0)
       .pipe(
         tap(respone => this.total = respone.data.songs.total),
         map(({ data }) => data.songs.songs)
@@ -94,31 +119,36 @@ export class HomeComponent implements OnInit {
         tap(respone => this.total = respone.data.songs.total),
         map(({ data }) => data.songs.songs)
       );
-
-
+      this.e=number;
   }
   getFavoriteSongs() {
+    if( this.user._id !=null){
     this.fsongsAsync = this.songService.getFavoriteSongByUserId(this.user._id, 20, 0)
       .pipe(
         tap(reponse => this.totalfs = reponse.data.favoriteSongsByUser.total),
         map(({ data }) => data.favoriteSongsByUser.songs)
       );
-      this.fsongsAsync.subscribe(data=>{
-        console.log("gfd");
-        console.log(data);
-      });
-      
+    this.fsongsAsync.subscribe(data => {
+      console.log("favoritesong");
+      console.log(data);
+    });
   }
+  }
+ 
   getarrayPageNumber(count) {
     return new Array(Math.ceil(count / 6));
   }
-  addFavoriteSong(songId) {
+  temp: number[] = [];
+  addFavoriteSong(songId, j) {
     this.user = JSON.parse(localStorage.getItem('currentUser'));
     this.songService.addFavoriteSongByUserId(this.user._id, songId).subscribe(data => {
       console.log('Add favorite song successfully');
       //this.router.navigate(['favoriteSong'], { queryParams: { added: 'true' } });
+      this.getFavoriteSongs();
       this.showNotification();
-     
+      this.isActive = songId;
+      this.temp[j] = songId;
+
     });
   }
 
@@ -145,8 +175,7 @@ export class HomeComponent implements OnInit {
       this.notification = null;
     }, 2000);
   }
-
-
+  
 
 }
 
